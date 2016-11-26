@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                   Zostałeś zalogowany! To jest nasza strona główna (home)
                 </div>
             </div>
         </div>
