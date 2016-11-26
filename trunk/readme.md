@@ -1,27 +1,60 @@
-# Laravel PHP Framework
+//=======Tworzenie bazy danych===============//
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+1. Wchodzimy na stronę: localhost:8080/
+2. Widzimy panel logowania do phpMyAdmin - Login: root | hasło: root123
+3. Na pasku u góry klikamy Konta użytkowników
+4. Następnie poniżej klikamy "Add user account"
+5. Uzupełniamy następujące pola (tylko wspomniane poniżej):
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+Nazwa użytkownika: admin
+Hasło: admin123
+Powtórz: admin123
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Zaznaczamy "Utwórz bazę danych z taką samą nazwą i przyznaj wszystkie uprawnienia"
 
-## Official Documentation
+Wszystko niewymienione zostawiamy domyślnie lub puste. 
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+6. Klikamy "Wykonaj" i wylogowujemy się z root'a (mała ikonka drzwi pod napisem phpMyAdmin).
+7. Od tej pory mamy utworzone osobne konto i baze danych w phpMyAdmin (i to te dane będziemy podawać w pliku .env)
 
-## Contributing
+Dane:
+login - admin
+hasło - admin123
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Te kroki są jednorazowe. Wystarczy zrobić to raz i więcej powtarzać nie będzie potrzeby.
 
-## Security Vulnerabilities
+//=========Instalacja projektu==================//
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+1. git clone (adres-repo) będąc w głównym katalogu (tym w którym znajdują sie takie katalogi jak ClionProjects czy PhpstormProjects)
+2. Poniższe instrukcje można wkleić bezpośrednio do konsoli:
 
-## License
+rm -rf PhpmystormProjects/
+mv php_2016_zarzadzanie_czasem/ PhpstormProjects/
+cd PhpstormProjects/trunk/
+composer install
+chmod -R 0777 storage/
+cp .env.example .env
+php artisan key:generate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+3. Następnie:
+vim .env (lub edycja w PhpstormProjects) i zmieniamy:
+
+DB_DATABASE=admin	
+DB_USERNAME=admin
+DB_PASSWORD=admin123
+
+4. Będąc w katalogu trunk:
+php artisan migrate
+
+5. Jednokrotnie należy też wyedytować (albo najlepiej przekopiować plik konfiguracyjny) w nginx:
+cd /etc/nginx/sites-available/
+sudo su
+student123
+cp laravel project (lub vim laravel)
+vim project
+
+Jeśli plik konfiguracyjny został skopiowany należy zmienić port z 8000 na jakiś inny np. 8009. Jeśli jest wyedytowany to może zostać 8000.
+Trzeba też zmienić ścieżkę root do katalogu trunk/public/ w projekcie i zapisać zmiany. Jeśli plik konfiguracyjny był kopiowany należy też pamiętać
+o utworzeniu dowiązania symbolicznego: ln -s project ../sites-enabled/project
+
+6. Po przejściu na stronę localhost:8000 lub localhost:8009 (w zależności od konfiguracji) powinna wyświetlić się strona startowa
