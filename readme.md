@@ -47,6 +47,13 @@
     DB_DATABASE=admin  
     DB_USERNAME=admin  
     DB_PASSWORD=admin123  
+    
+    MAIL_DRIVER=smtp  
+    MAIL_HOST=smtp.gmail.com  
+    MAIL_PORT=587  
+    MAIL_USERNAME=timeplanningservice@gmail.com  
+    MAIL_PASSWORD=timeplanning1  
+    MAIL_ENCRYPTION=tls  
 
 4. Będąc w katalogu **trunk**:
 
