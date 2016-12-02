@@ -57,7 +57,7 @@
 
 4. Będąc w katalogu **trunk**:
 
-        php artisan migrate
+        php artisan migrate:refresh --seed
 
 5. Jednokrotnie należy też wyedytować (albo najlepiej przekopiować plik konfiguracyjny) w nginx:
 
