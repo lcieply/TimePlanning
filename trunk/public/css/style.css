@@ -1,17 +1,19 @@
-div#menu a{
+@-webkit-keyframes typing { from { width: 0; } }
+@-webkit-keyframes blink-caret { 50% { border-color: transparent; } }
 
+div#menu a{
     text-align: center;
     text-decoration: none;
     font-style: inherit;
     color: #000000;
-    background-color: #1f648b;
+    background-color: #2e6da4;
     margin-right: 25px;
     margin-left: 25px;
     line-height:55px;
     display: inline-block;
 }
 div#menu a:hover{
-    background-color: #2e6da4;
+    background-color: #2a88bd;
 }
 html, body {
     background: url(../images/kalendarz.jpg) no-repeat center;
@@ -40,16 +42,31 @@ html, body {
 }
 .content {
     text-align: center;
+
+
 }
 
 .title {
+    background-color: #2e6da4;
     font-size: 84px;
+    font-family: 'Raleway';
+    font-weight: bold;
 }
 .title2 {
     font-size: 44px;
+    background-color: #2e6da4;
+    font-family: 'Raleway';
+    font-weight: bold;
+    border-right: .1em solid black;
+    width: calc(0.55em * 32);
+    width: 32ch;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-animation: typing 5s steps(32, end),
+    blink-caret .5s step-end infinite alternate;
 }
 .links > a {
-    color: #636b6f;
+    color: #2e6da4;;
     padding: 0 25px;
     font-size: 12px;
     font-weight: 600;
@@ -57,10 +74,14 @@ html, body {
     text-decoration: none;
     text-transform: uppercase;
 }
+
+
+
 .m-b-md {
     margin-bottom: 30px;
 }
 footer{
+    text-align: center;
     padding: 5px 5px;
-    background-color: #1b6d85;
+    background-color: #2e6da4;
 }
