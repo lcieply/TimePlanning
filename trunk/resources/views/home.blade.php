@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
 
 @section('content')
 <div class="container">

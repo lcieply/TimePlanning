@@ -1,0 +1,65 @@
+div#menu a{
+
+    text-align: center;
+    text-decoration: none;
+    font-style: inherit;
+    color:rgb(193,193,193);
+    margin-right: 25px;
+    margin-left: 25px;
+    line-height:55px;
+    display: inline-block;
+}
+div#menu a:hover{
+    background-color: #2e6da4;
+}
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+}
+.full-height {
+    height: 100vh;
+}
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.position-ref {
+    position: relative;
+}
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+.content {
+    text-align: center;
+}
+div#panel{
+    background: url(../images/kalendarz.jpg) no-repeat center;
+}
+.title {
+    font-size: 84px;
+}
+.title2 {
+    font-size: 44px;
+}
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.m-b-md {
+    margin-bottom: 30px;
+}
+.footer{
+    padding: 25px 25px;
+}
