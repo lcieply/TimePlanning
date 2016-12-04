@@ -21,6 +21,6 @@ Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name
 
 Route::get('/home', 'HomeController@index');
 Route::get('/mettingsInfo', 'MettingsInfoController@index');
-
+Route::get('/plansView', 'PlansViewController@index');
 
 
