@@ -62,15 +62,10 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ url('/manageAccount') }}"
-                                           onclick="event.preventDefault();
-                                                     document.getElementById('manageAccount-form').submit();">
+                                        <a href="{{ url('/manageAccount') }}">
                                             Manage Account
                                         </a>
 
-                                        <form id="manageAccount-form" action="{{ url('/manageAccount') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
                                     </li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
