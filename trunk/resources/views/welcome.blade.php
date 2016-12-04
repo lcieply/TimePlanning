@@ -15,18 +15,22 @@
 
 
 </head>
+<! --- MENU  --->
 <body>
+
 <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
         <div id="menu" class="top-right links">
             @if (Auth::check())
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/home') }}">STRONA GŁÓWNA</a>
             @else
-                <a href="{{ url('/login') }}">Login</a>
-                <a href="{{ url('/register') }}">Register</a>
+                <a href="{{ url('/login') }}">ZALOGUJ</a>
+                <a href="{{ url('/register') }}">REJESTRACJA</a>
             @endif
         </div>
+
     @endif
+        <! --- PANEL --->
 
     <div id="panel" class="content">
         <div class="title m-b-md">
@@ -42,7 +46,7 @@
 
     <h5>2016 &copy by: Marta Mańka  Kamil Jureczka Łukasz Ciepły Radosław Ciupek </h5>
 
-
+<!---------------
     <br>
     <ul class="list-inline">
         <li>
@@ -58,7 +62,7 @@
             <a href="https://bitbucket.org/radopopulos/"> <i class="fa fa-bitbucket fa-fw fa-3x"></i></a>
         </li>
     </ul>
-
+------------!>
 </footer>
 </body>
 </html>
