@@ -72,7 +72,3 @@
     o utworzeniu dowiązania symbolicznego: ln -s project ../sites-enabled/project**
 
 6. Po przejściu na stronę [localhost:8000](localhost:8000) lub [localhost:8009](localhost:8009) (w zależności od konfiguracji) powinna wyświetlić się strona startowa
-
-   **Konto administratora:**  
-     Login: admin@admin  
-     Hasło: admin
