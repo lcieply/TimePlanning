@@ -10,6 +10,9 @@ namespace App\Http\Controllers\Auth;
 
 
 use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+
 
 class ManageAccountController extends Controller
 {
@@ -20,6 +23,10 @@ class ManageAccountController extends Controller
 
     public function index()
     {
-        return view('auth/manageAccount');
+
+        $user = Auth::user();
+        return view('auth/manageAccount')->withUser($user);
     }
+
+
 }
