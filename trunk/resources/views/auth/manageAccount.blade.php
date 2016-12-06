@@ -6,33 +6,25 @@
     <br><br>
     <form method="post">
         <label>Name:</label>
-        <input type="text" value="{{ $user->name }}">
-    </form>
+        <input type="text" value="{{ $user->name }}"><Br>
 
-    <form method="post">
         <label>Surname:</label>
-        <input type="text" value="{{ $user->surname }}">
-    </form>
+        <input type="text" value="{{ $user->surname }}"><br>
 
-    <form method="post">
         <label>Email address:</label>
-        <input type="text" value="{{ $user->email }}" disabled>
-    </form>
+        <input type="text" value="{{ $user->email }}" disabled><br>
 
-    <form method="post">
         <label>City:</label>
-        <input type="text" value="{{ $user->city }}">
-    </form>
+        <input type="text" value="{{ $user->city }}"><br>
 
-    <form method="post">
         <label>Address:</label>
-        <input type="text" value="{{ $user->address }}">
-    </form>
+        <input type="text" value="{{ $user->address }}"><br>
 
-    <form method="post">
         <label>Phone:</label>
-        <input type="text" value="{{ $user->phone }}">
-    </form>
+        <input type="text" value="{{ $user->phone }}"><br>
+
+        <input type="submit" value="Confirm">
+
 
 
 
