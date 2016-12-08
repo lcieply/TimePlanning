@@ -13,7 +13,7 @@
         </ul>
     @endif
 
-    <a href="home">Home</a>
+
     <br><br>
     <form method="post" action="{{ route('users.update') }}">
         <label for="name">Name:</label>
@@ -35,9 +35,13 @@
         <input type="text" value="{{ $user->phone }}" name="phone"><br>
 
         <input type="submit" value="Save changes">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        {{ csrf_field() }}
+
+
 
     </form>
+
+    <a href="home">Back </a>
 
 
 @endsection

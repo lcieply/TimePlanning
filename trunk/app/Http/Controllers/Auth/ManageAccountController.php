@@ -37,7 +37,7 @@ class ManageAccountController extends Controller
             'surname' => 'required|max:255',
             'city' => 'max:255',
             'address' => 'max:255',
-            'phone' => 'max:9',
+            'phone' => 'digits_between:1,9',
         ]);
 
         $name = $request['name'];
@@ -46,7 +46,7 @@ class ManageAccountController extends Controller
         $address = $request['address'];
         $phone = $request['phone'];
         DB::table('users')
-            ->where('email', Auth::user()->email)
+            ->where('id', Auth::user()->id)
             ->update([
                 'name' => $name,
                 'surname' => $surname,
