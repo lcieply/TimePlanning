@@ -34,7 +34,10 @@
         mv php_2016_zarzadzanie_czasem/ PhpstormProjects/  
         cd PhpstormProjects/trunk/  
         composer install  
+        sudo su  
+        student123  
         chmod -R 0777 storage/  
+        exit  
         cp .env.example .env  
         php artisan key:generate
 
