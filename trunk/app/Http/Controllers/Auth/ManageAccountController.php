@@ -46,7 +46,7 @@ class ManageAccountController extends Controller
         $address = $request['address'];
         $phone = $request['phone'];
         DB::table('users')
-            ->where('id', Auth::user()->id)
+            ->where('id', Auth::id())
             ->update([
                 'name' => $name,
                 'surname' => $surname,
