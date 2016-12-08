@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //Calendar start from 1970
+        $event = \Calendar::event(
+            "Epoch time",
+            true,
+            '1970-01-01',
+            '1970-01-01',
+            1
+        );
+
+        $calendar = \Calendar::addEvent($event);
+
+        return view('home', compact('calendar'));
     }
 }
