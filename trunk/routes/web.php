@@ -23,3 +23,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/mettingsInfo', 'MettingsInfoController@index');
 Route::get('/plansView', 'PlansViewController@index');
 Route::get('/manageAccount', 'Auth\ManageAccountController@index');
+Route::post('/manageAccount/update', [
+    'uses' => 'Auth\ManageAccountController@save',
+    'as' => 'users.update'
+]);
