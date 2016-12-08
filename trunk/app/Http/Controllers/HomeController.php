@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
+use Illuminate\Support\Facades\Auth;
+use App\Event;
 
 class HomeController extends Controller
 {
@@ -24,16 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //Calendar start from 1970
-        $event = \Calendar::event(
-            "Epoch time",
-            true,
-            '1970-01-01',
-            '1970-01-01',
-            1
-        );
-
-        $calendar = \Calendar::addEvent($event);
+        $events = Event::where('user_id','=', Auth::id())->get();
+        $calendar = \Calendar::addEvents($events);
 
         return view('home', compact('calendar'));
     }
