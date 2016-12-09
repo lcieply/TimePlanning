@@ -27,7 +27,8 @@
             Time planning </br>
         </div>
         <div class="title2">
-            Zaplanuj swój czas co do minuty!
+            Manage your free time!
+
         </div>
     </div>
 </div>

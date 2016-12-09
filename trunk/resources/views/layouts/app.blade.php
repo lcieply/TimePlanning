@@ -14,6 +14,7 @@
     <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
+
     <!-- Scripts -->
     <script>
 
@@ -59,8 +60,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">ZALOGUJ</a></li>
-                        <li><a href="{{ url('/register') }}">REJESTRACJA</a></li>
+                        <li><a href="{{ url('/login') }}">LOGIN</a></li>
+                        <li><a href="{{ url('/register') }}">REGISTER</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -70,7 +71,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ url('/manageAccount') }}">
-                                        USTAWIENIA KONTA
+                                        MANAGE ACCOUNT
                                     </a>
 
 
@@ -79,7 +80,7 @@
                                     <a href="{{ url('/logout') }}"
                                        onclick="event.preventDefault();
                                                       document.getElementById('logout-form').submit();">
-                                        Logout
+                                       LOGOUT
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -98,8 +99,6 @@
 </div>
 
 
-
-<br><br><br>
 <footer>
     <! --- FOOTER & social links --->
 
