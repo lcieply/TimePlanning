@@ -2,17 +2,6 @@
 
 @section('content')
 
-
-    {{--@if(count($errors) > 0)--}}
-        {{--<ul>--}}
-            {{--@foreach($errors->all() as $error)--}}
-                {{--<li>--}}
-                    {{--{{ $error }}--}}
-                {{--</li>--}}
-            {{--@endforeach--}}
-        {{--</ul>--}}
-    {{--@endif--}}
-
     <br><br>
     <form method="post" action="{{ route('users.update') }}">
         <label for="name">Name:</label>
