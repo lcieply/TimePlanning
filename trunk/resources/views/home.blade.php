@@ -14,8 +14,10 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <div class="col-lg-9 col-md-offset-2">
                         {!! $calendar->calendar() !!}
                         {!! $calendar->script() !!}
+                        </div>
                     </div>
                 </div>
             </div>
