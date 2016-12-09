@@ -14,7 +14,7 @@
     <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-
+    <link rel="stylesheet" href="{{ URL::asset('css/calendar.min.css') }}"/>
     <!-- Scripts -->
     <script>
 
@@ -94,7 +94,7 @@
             </div>
         </div>
     </nav>
-    <br><br>
+
     @yield('content')
 </div>
 
