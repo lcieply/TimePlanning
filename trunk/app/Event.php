@@ -13,6 +13,18 @@ class Event extends Model implements \MaddHatter\LaravelFullcalendar\Event
 
     protected $dates = ['start_time', 'end_time'];
 
+    public static function rules() {
+        return [
+            'start' => 'before:end',
+            'name' => 'required',
+            'title' => 'required',
+            'start_date' => 'date|required',
+            'start_time' => 'required',
+            'end_date' => 'date|required',
+            'end_time' => 'required',
+        ];
+    }
+
     public function getId() {
         return $this->id;
     }
@@ -37,4 +49,5 @@ class Event extends Model implements \MaddHatter\LaravelFullcalendar\Event
     {
         return $this->end_time;
     }
+
 }

@@ -22,6 +22,8 @@ Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name
 Route::get('/home', 'HomeController@index');
 Route::get('/mettingsInfo', 'MeetingsInfoController@index');
 Route::get('/plansView', 'PlansViewController@index');
+Route::resource('newEvent', 'NewEventController');
+Route::resource('home', 'HomeController');
 Route::get('/manageAccount', 'Auth\ManageAccountController@index');
 Route::post('/manageAccount/update', [
     'uses' => 'Auth\ManageAccountController@save',

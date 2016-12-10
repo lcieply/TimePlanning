@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -27,6 +28,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function id(){
+        return Auth::id();
+    }
     public function events()
     {
         return $this->hasMany(Event::class);

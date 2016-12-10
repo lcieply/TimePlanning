@@ -24,7 +24,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public static function index()
     {
         $events = Event::where('user_id','=', Auth::id())->get();
         $calendar = \Calendar::addEvents($events);
