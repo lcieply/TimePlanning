@@ -3,6 +3,7 @@
  * Docs & License: http://fullcalendar.io/
  * (c) 2015 Adam Shaw
  */
+
 .fc {
     direction: ltr;
     text-align: left
@@ -796,7 +797,9 @@ a.fc-more:hover {
 }
 
 .fc-time-grid-event.fc-short .fc-title {
-    font-size: .85em;
+    display: inline-block;
+
+    font-size: .40em;
     padding: 0
 }
 
@@ -804,9 +807,9 @@ a.fc-more:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 8px;
+    height: 5px;
     overflow: hidden;
-    line-height: 8px;
+    line-height: 5px;
     font-size: 11px;
     font-family: monospace;
     text-align: center;

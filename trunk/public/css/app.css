@@ -4228,7 +4228,6 @@ tbody.collapse.in {
         box-shadow: 0 12px 8px -9px #1f3d4c;
         position: fixed;
         width: 100%;
-        margin-bottom: 150px;
         font-weight: bold;
         color: #333;
 
@@ -4380,7 +4379,7 @@ tbody.collapse.in {
     }
 
     .navbar-nav .open .dropdown-menu .dropdown-header, .navbar-nav .open .dropdown-menu > li > a {
-        padding: 5px 15px 5px 25px
+        padding: 5px 15px 5px 15px
     }
 
     .navbar-nav .open .dropdown-menu > li > a {
@@ -5321,7 +5320,7 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
 }
 
 .media-body {
-    width: 10000px
+    width: 100%;
 }
 
 .media-object.img-thumbnail {
@@ -5336,7 +5335,7 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
     padding-right: 10px
 }
 
-.media-body, .media-left, .media-right {
+.media-, .media-left, .media-right {
     display: table-cell;
     vertical-align: top
 }

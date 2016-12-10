@@ -10,7 +10,7 @@
                 <div class="panel-body">
 
 
-    <form class="form-horizontal" role="form" method="post" action="{{ route('users.update') }}">
+    <form form-horizontal class="form-horizontal" role="form" method="post" action="{{ route('users.update') }}">
         <div class="form-group">
         <label for="name" class="col-md-4 control-label">Name: </label>
             <div class="col-md-6">
@@ -97,5 +97,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

@@ -1,28 +1,64 @@
-<form action="{{route('newEvent.store')}}" method="post">
-    <label for="name">Title</label>
-    <input type="text" name="title" value="{{ old('title') }}">
-    <br>
-    <label for="name">Name</label>
-    <input type="text" name="name" value="{{ old('name') }}">
-    <br>
-    <label for="name">Start date</label>
-    <input type="date" name="start_date" value="{{ old('start_date') }}">
-    <br>
-    <label for="name">Start time</label>
-    <input type="time" name="start_time" value="{{ old('start_time') }}">
-    <br>
-    <label for="name">End date</label>
-    <input type="date" name="end_date" value="{{ old('end_date') }}">
-    <br>
-    <label for="name">End time</label>
-    <input type="time" name="end_time" value="{{ old('end_time') }}">
-    <br>
+@extends('layouts.app')
+@section('content')
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
+<br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">new Event</div>
+                    <div class="panel-body">
+
+
+   <form action="{{route('newEvent.store')}}" method="post" form-horizontal class="form-horizontal">
+                        <div class="form-group">
+    <label for="name" class="col-md-4 control-label">Title</label>
+            <div class="col-md-6">
+    <input type="text" name="title" class="form-control" value="{{ old('title') }}">
+                            </div>
+              </div>
+       <div class="form-group">
+    <label for="name" class="col-md-4 control-label">Name</label>
+                            <div class="col-md-6">
+    <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                             </div>
+       </div>
+           <div class="form-group">
+    <label for="name" class="col-md-4 control-label">Start date</label>
+                            <div class="col-md-6">
+    <input type="date" name="start_date" class="form-control" value="{{ old('start_date') }}">
+                               </div>
+           </div>
+               <div class="form-group">
+    <label for="name" class="col-md-4 control-label">Start time</label>
+                            <div class="col-md-6">
+    <input type="time" name="start_time" class="form-control" value="{{ old('start_time') }}">
+                            </div>
+               </div>
+                   <div class="form-group">
+    <label for="name" class="col-md-4 control-label">End date</label>
+                                <div class="col-md-6">
+    <input type="date" name="end_date" class="form-control" value="{{ old('end_date') }}">
+                                </div>
+                   </div>
+                       <div class="form-group">
+    <label for="name" class="col-md-4 control-label">End time</label>
+                                    <div class="col-md-6">
+    <input type="time" name="end_time" class="form-control" value="{{ old('end_time') }}">
+                                    </div>
+                           </div>
+
     <input type="text" name="start" value="" hidden>
     <input type="text" name="end" value="" hidden>
-    <input type="submit" value="Create">
-    {{csrf_field()}}
-</form>
+     
+         <div class="col-md-6 col-md-offset-2">
 
+    <input type="submit" value="Create" class="btn btn-primary pull-right ">
+    {{csrf_field()}}
+</div>
+
+</form>
+<br>
 <div>
     @foreach ($errors->all() as $message)
         <p class="alert alert-warning">
@@ -31,3 +67,11 @@
         </p>
     @endforeach
 </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
