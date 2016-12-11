@@ -18,6 +18,7 @@ class CreateEventsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('name', 50);
             $table->string('title', 100);
+            $table->boolean('allday')->default(false);
             $table->timestamp('start_time');
             $table->timestamp('end_time')->nullable();
             $table->timestamps();

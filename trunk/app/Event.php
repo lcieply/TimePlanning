@@ -36,8 +36,7 @@ class Event extends Model implements \MaddHatter\LaravelFullcalendar\Event
 
     public function isAllDay()
     {
-        //TO-DO
-        return true;
+        return (bool)$this->allday;
     }
 
     public function getStart()
@@ -50,4 +49,10 @@ class Event extends Model implements \MaddHatter\LaravelFullcalendar\Event
         return $this->end_time;
     }
 
+    public function getEventOptions()
+    {
+        return [
+            'url' => route('home.index'),
+        ];
+    }
 }

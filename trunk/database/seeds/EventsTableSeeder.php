@@ -17,6 +17,7 @@ class EventsTableSeeder extends Seeder
             'user_id' => '1',
             'name' => 'Sample event',
             'title' => 'Sample event',
+            'allday' => 'true',
             'start_time' => '2016-12-06',
             'end_time' => '2016-12-06',
         ]);
