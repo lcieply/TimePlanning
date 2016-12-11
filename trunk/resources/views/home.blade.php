@@ -26,7 +26,14 @@
 
                         {!! $calendar->calendar() !!}
                         {!! $calendar->script() !!}
-                            <br><br><br>
+                            <br>
+                            <div class="col-md-8 col-md-offset-2">
+                                <form  action="newEvent" method="get">
+                                <input type="submit" value="new Event" class="btn btn-primary  ">
+                                {{csrf_field()}}
+                                </form>
+                            </div>
+                            <br><br>
                         </div>
                     </div>
                 </div>
