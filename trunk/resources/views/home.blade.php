@@ -28,10 +28,7 @@
                         {!! $calendar->script() !!}
                             <br>
                             <div class="col-md-8 col-md-offset-2">
-                                <form  action="newEvent" method="get">
-                                <input type="submit" value="New Event" class="btn btn-primary  ">
-                                {{csrf_field()}}
-                                </form>
+                                <a href="/newEvent" value="New Event" class="btn btn-primary  ">New Event</a>
                             </div>
                             <br><br>
                         </div>

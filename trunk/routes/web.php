@@ -19,11 +19,10 @@ Auth::routes();
 
 Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name('user.activate');
 
-Route::get('/home', 'HomeController@index');
-Route::get('/mettingsInfo', 'MeetingsInfoController@index');
-Route::get('/plansView', 'PlansViewController@index');
-Route::resource('newEvent', 'NewEventController');
 Route::resource('home', 'HomeController');
+Route::resource('mettingsInfo', 'MeetingsInfoController');
+Route::resource('newEvent', 'NewEventController');
+Route::resource('plansView', 'PlansViewController');
 Route::get('/manageAccount', 'Auth\ManageAccountController@index');
 Route::post('/manageAccount/update', [
     'uses' => 'Auth\ManageAccountController@save',
