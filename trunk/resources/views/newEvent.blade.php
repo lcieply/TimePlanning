@@ -9,7 +9,6 @@
                     <div class="panel-heading">new Event</div>
                     <div class="panel-body">
 
-
    <form action="{{route('newEvent.store')}}" method="post" form-horizontal class="form-horizontal">
                         <div class="form-group">
     <label for="name" class="col-md-4 control-label">Title</label>
@@ -73,5 +72,5 @@
             </div>
         </div>
     </div>
-
+    <br><br>
 @endsection

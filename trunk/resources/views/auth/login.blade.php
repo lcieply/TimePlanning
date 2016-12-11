@@ -1,10 +1,10 @@
 
-<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
-
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
+    <br><br><br><br>
+    <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

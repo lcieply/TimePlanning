@@ -1,7 +1,6 @@
-<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
 
 @extends('layouts.app')
-
+<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
 <!DOCTYPE html>
 <html>
     <head>
