@@ -22,13 +22,12 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="col-lg-9 col-md-offset-2">
-<br><br><br>
-
-                        {!! $calendar->calendar() !!}
-                        {!! $calendar->script() !!}
+                            <br><br><br>
+                            {!! $calendar->calendar() !!}
+                            {!! $calendar->script() !!}
                             <br>
                             <div class="col-md-8 col-md-offset-2">
-                                <a href="/newEvent" value="New Event" class="btn btn-primary  ">New Event</a>
+                                <a href="/events/create" value="New Event" class="btn btn-primary  ">New Event</a>
                             </div>
                             <br><br>
                         </div>
