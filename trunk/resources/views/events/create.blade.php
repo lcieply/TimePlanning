@@ -66,6 +66,11 @@
                                 <input type="submit" value="Create" class="btn btn-primary pull-right ">
                                 {{csrf_field()}}
                             </div>
+
+                            <div class="col-md-8 col-md-offset-2">
+                                <a href="{{route('home.index')}}" value="Edit" class="btn btn-primary">Back</a>
+                            </div>
+
                         </form>
                     </div>
                 </div>
