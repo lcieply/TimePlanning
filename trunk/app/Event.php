@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model implements \MaddHatter\LaravelFullcalendar\Event
 {
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     protected $dates = ['start_time', 'end_time'];
+
+    protected $fillable = [
+      'name', 'title', 'start_time', 'end_time', 'allday'
+    ];
 
     public static function rules() {
         return [
@@ -52,7 +51,12 @@ class Event extends Model implements \MaddHatter\LaravelFullcalendar\Event
     public function getEventOptions()
     {
         return [
-            'url' => route('home.index'),
+            'url' => route('events.show', $this->getId()),
         ];
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

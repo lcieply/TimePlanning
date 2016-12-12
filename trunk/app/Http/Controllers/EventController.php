@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Event;
 
-class NewEventController extends Controller
+class EventController extends Controller
 {
     public function __construct()
     {
@@ -19,7 +19,7 @@ class NewEventController extends Controller
      */
     public function index()
     {
-        return view('newEvent');
+        return redirect()->route('home.index');
     }
 
     /**
@@ -29,7 +29,7 @@ class NewEventController extends Controller
      */
     public function create()
     {
-        //
+        return view('events.create');
     }
 
     /**
@@ -45,15 +45,15 @@ class NewEventController extends Controller
         $request->merge(array('start' =>  $start));
         $request->merge(array('end' =>  $end));
         $this->validate($request, Event::rules());
-        \DB::table('events')->insert(
-            array(
+
+        \DB::table('events')->insert([
                 'name' => $_POST['name'],
                 'user_id' => User::id(),
                 'title' => $_POST['title'],
                 'start_time' => $start,
                 'end_time' => $end
-            )
-        );
+        ]);
+
         return redirect()->route('home.index');
     }
 
@@ -63,9 +63,9 @@ class NewEventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Event $event)
     {
-        //
+        return view('events.show')->withEvent($event);
     }
 
     /**
@@ -74,9 +74,9 @@ class NewEventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event)
     {
-        //
+        return view('events.edit')->withEvent($event);
     }
 
     /**
@@ -86,9 +86,17 @@ class NewEventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Event $event)
     {
-        //
+        //TO-DO validation + dates
+        //$this->validate($request, Event::rules());
+
+        $event->update([
+            'title' => $request->title,
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('events.show', $event);
     }
 
     /**
@@ -97,8 +105,10 @@ class NewEventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Event $event)
     {
-        //
+        $event->delete();
+
+        return redirect()->route('home.index');
     }
 }
