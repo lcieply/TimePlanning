@@ -72,19 +72,21 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class=".col-md-8 col-md-offset-2">
 
-                            <div class="col-md-8 col-md-offset-2">
-                                <div class="form-group col-md-7 pull-left control-label">
+                                <a href="{{route('home.index')}}" class="btn btn-primary">Back</a>
+
+
                                     <input type="submit" value="Save changes" class="btn btn-primary">
                                     {{ csrf_field() }}
-                                </div>
-                            </div>
-                        </form>
+                                    </form>
 
-                        <div class="col-md-8 col-md-offset-2">
-                            <a href="{{route('home.index')}}" class="btn btn-primary">Back</a>
+
+
+
+
                         </div>
-
+                    </div>
                     </div>
                 </div>
             </div>

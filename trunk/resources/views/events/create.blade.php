@@ -61,15 +61,15 @@
                             <input type="text" name="start" value="" hidden>
                             <input type="text" name="end" value="" hidden>
 
-                            <div class="col-md-6 col-md-offset-2">
+                            <div class="col-md-8 col-md-offset-2">
 
                                 <input type="submit" value="Create" class="btn btn-primary pull-right ">
                                 {{csrf_field()}}
-                            </div>
 
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-8 col-md-offset-2 pull-left">
                                 <a href="{{route('home.index')}}" class="btn btn-primary">Back</a>
                             </div>
+                    </div>
 
                         </form>
                     </div>

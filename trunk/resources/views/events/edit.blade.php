@@ -62,18 +62,18 @@
                                 <label for="name" class="col-md-4 control-label">End time</label>
                                 <div class="col-md-6">
                                     <input type="time" name="end_time" class="form-control" value="{{ $endtime }}">
-                                </div>
-                            </div>
+                        </form>
 
-                            <div class="col-md-6 col-md-offset-2">
+                                    <br>
+                            <div class=".col-md-6 col-md-offset-2">
                                 <input type="submit" value="Update" class="btn btn-primary pull-right ">
                                 {{csrf_field()}}
                                 {{method_field('PATCH')}}
-                            </div>
-                        </form>
-                        <div class="col-md-8 col-md-offset-2">
+
+
+                        <div class=".col-md-6 col-md-offset-2">
                             <a href="{{route('events.show', $event)}}" value="Back" class="btn btn-primary">Back</a>
-                        </div>
+                        </div>   </div>  </div>  </div>
                     </div>
                 </div>
             </div>
