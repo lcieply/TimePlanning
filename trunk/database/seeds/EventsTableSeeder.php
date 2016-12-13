@@ -20,6 +20,7 @@ class EventsTableSeeder extends Seeder
             'allday' => true,
             'start_time' => '2016-12-06',
             'end_time' => '2016-12-06',
+            'private' => false,
         ]);
     }
 }
