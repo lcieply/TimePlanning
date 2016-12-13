@@ -88,12 +88,17 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //TO-DO validation + dates
-        //$this->validate($request, Event::rules());
+        $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
+        $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
+        $request->merge(array('start' =>  $start));
+        $request->merge(array('end' =>  $end));
+        $this->validate($request, Event::rules());
 
         $event->update([
-            'title' => $request->title,
-            'name' => $request->name,
+            'title' => $_POST['title'],
+            'name' => $_POST['name'],
+            'start_time' => $start,
+            'end_time' => $end,
         ]);
 
         return redirect()->route('events.show', $event);

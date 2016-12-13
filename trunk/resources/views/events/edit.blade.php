@@ -29,6 +29,43 @@
                                     <input type="text" name="name" class="form-control" value="{{ $event->name }}">
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="name" class="col-md-4 control-label">Start date</label>
+                                <?php
+                                    $startdate = explode(" ", $event->start_time);
+                                    $starttime = substr($startdate[1],0,5);
+                                ?>
+                                <div class="col-md-6">
+                                    <input type="date" name="start_date" class="form-control" value="{{ $startdate[0] }}">
+                                </div>
+                            </div>
+tl
+                            <div class="form-group">
+                                <label for="name" class="col-md-4 control-label">Start time</label>
+                                <div class="col-md-6">
+                                    <input type="time" name="start_time" class="form-control" value="{{ $starttime }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name" class="col-md-4 control-label">End date</label>
+                                <?php
+                                    $enddate = explode(" ", $event->end_time);
+                                    $endtime = substr($enddate[1],0,5);
+                                ?>
+                                <div class="col-md-6">
+                                    <input type="date" name="end_date" class="form-control" value="{{ $enddate[0] }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name" class="col-md-4 control-label">End time</label>
+                                <div class="col-md-6">
+                                    <input type="time" name="end_time" class="form-control" value="{{ $endtime }}">
+                                </div>
+                            </div>
+
                             <div class="col-md-6 col-md-offset-2">
                                 <input type="submit" value="Update" class="btn btn-primary pull-right ">
                                 {{csrf_field()}}

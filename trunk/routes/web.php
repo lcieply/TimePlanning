@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::check())
+        return redirect()->route('home.index');
+    else
+        return view('welcome');
 });
 
 Auth::routes();
