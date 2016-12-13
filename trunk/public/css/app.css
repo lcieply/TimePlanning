@@ -6795,5 +6795,10 @@ footer{
     position: fixed;
     width:100%;
     bottom:0;
+
+
     box-shadow: 12px 12px 12px 12px #1f3d4c;
+}
+div#kalendarz{
+    z-index: 0;
 }
