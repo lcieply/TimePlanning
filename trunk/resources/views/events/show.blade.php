@@ -35,18 +35,16 @@
                           <div class="col-md-6">
                             <div class="form-group">
                                 <input name="end_time" class="form-control" VALUE="{{ $event->end_time  }} " size="20" readonly>
-                            </div>
-                </div>
+
 <br>
-                                <div class="col-md-4  col-md-offset-2 pull-left">
+                                <div class="col-md-6  col-md-offset-2">
 
-                        <a href="{{route('home.index')}}" value="home" class="btn btn-primary">Back</a>
+                        <a href="{{route('home.index')}}" value="home" class="btn btn-primary pull-left">Back</a>
 
-                                    <div class="col-md-6  col-md-offset-2">
                                 <a href="{{route('events.edit', $event)}}" value="Edit" class="btn btn-primary  ">Edit</a>
                         </div>
-                            </div>
-                        <div class="col-md-2">
+
+                        <div class="col-md-2 ">
 
     <form action="{{route('events.destroy', $event)}}" method="post" form-horizontal class="form-horizontal">
                               <input  type="submit" value="Delete" class="btn btn-primary ">
@@ -54,12 +52,14 @@
                             {{method_field('DELETE')}}
                             </form>
                     </div>
-
+                            </div>
+                        </div>
                 </div>
                 </div>
             </div>
         </div>
     </div>
    </div>
+        </div>
     <br><br>
 @endsection
