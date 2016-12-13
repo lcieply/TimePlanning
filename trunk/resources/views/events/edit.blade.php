@@ -40,7 +40,6 @@
                                     <input type="date" name="start_date" class="form-control" value="{{ $startdate[0] }}">
                                 </div>
                             </div>
-tl
                             <div class="form-group">
                                 <label for="name" class="col-md-4 control-label">Start time</label>
                                 <div class="col-md-6">

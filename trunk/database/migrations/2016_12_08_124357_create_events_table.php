@@ -21,6 +21,7 @@ class CreateEventsTable extends Migration
             $table->boolean('allday')->default(false);
             $table->dateTime('start_time');
             $table->dateTime('end_time')->nullable();
+            $table->boolean('private')->default(true);
             $table->timestamps();
 
             $table->foreign('user_id')
