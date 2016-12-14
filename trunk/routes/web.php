@@ -23,6 +23,10 @@ Auth::routes();
 Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name('user.activate');
 
 Route::resource('users', 'UserController');
+Route::post('/users/search', [
+    'uses' => 'UserController@search',
+    'as' => 'users.search'
+]);
 Route::resource('home', 'HomeController');
 Route::resource('mettingsInfo', 'MeetingsInfoController');
 Route::resource('events', 'EventController');
