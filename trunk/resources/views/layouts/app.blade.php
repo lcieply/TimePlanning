@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Time planning') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -63,19 +63,24 @@
                         <li><a href="{{ url('/login') }}">LOGIN</a></li>
                         <li><a href="{{ url('/register') }}">REGISTER</a></li>
                     @else
-                        <form action="{{route('users.search')}}" method="post" form-horizontal class="navbar-form navbar-right">
-                            <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" name="search" placeholder="Search for a user...">
-                                <span class="input-group-btn">
+                        <li>
+                            <form action="{{route('users.search')}}" method="post" form-horizontal class="navbar-form pull-left">
+
+                                <div class="input-group custom-search-form ">
+
+                                    <input type="text" class="form-control" name="search" placeholder="Search for a user...">
+                                    <span class="input-group-btn">
                                     <button class="btn btn-default-sm" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
-                            </div>
-                            {{csrf_field()}}
-                        </form>
+                                </div>
 
+                                {{csrf_field()}}
+                            </form>
+                        </li>
                         <li class="dropdown">
+
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} {{ Auth::user()->surname }}<span class="caret"></span>
                             </a>
@@ -100,7 +105,9 @@
                                     </form>
                                 </li>
                             </ul>
-                        </li>
+                         </li>
+
+
                     @endif
                 </ul>
             </div>
