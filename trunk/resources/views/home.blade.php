@@ -21,15 +21,19 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div id="kalendarz" align="center" class="col-md-9 ">
-                            <br><br>
+
+                        <div id="kalendarz"  class="col-md-9 ">
+                            <br><br><br>
                             {!! $calendar->calendar() !!}
                             {!! $calendar->script() !!}
                             <br>
                             <div class="col-md-8 col-md-offset-2">
                                 <a href="/events/create" value="New Event" class="btn btn-primary  ">New Event</a>
+                                <br><br>
                             </div>
-                            <br><br>
+
+                        </div>
+
                         </div>
                     </div>
                 </div>
