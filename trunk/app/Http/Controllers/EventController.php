@@ -95,8 +95,8 @@ class EventController extends Controller
         $this->validate($request, Event::rules());
 
         $event->update([
-            'title' => $_POST['title'],
-            'name' => $_POST['name'],
+            'title' => $request->title,
+            'name' => $request->name,
             'start_time' => $start,
             'end_time' => $end,
         ]);

@@ -15,7 +15,7 @@ hr, img {
 
 html, body {
     background: url(../images/kalendarz.jpg) no-repeat center;
-    background-color: #fff;
+    background-color: #2e6da4;
     color: #000000;
     font-family: 'Alegreya', sans-serif;
     font-weight: 100;
@@ -6795,5 +6795,10 @@ footer{
     position: fixed;
     width:100%;
     bottom:0;
+
+
     box-shadow: 12px 12px 12px 12px #1f3d4c;
+}
+div#kalendarz{
+    z-index: 0;
 }

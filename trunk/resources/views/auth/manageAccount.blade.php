@@ -8,8 +8,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Manage account</div>
                     <div class="panel-body">
-
-
                         <form form-horizontal class="form-horizontal" role="form" method="post"
                               action="{{ route('users.update') }}">
                             <div class="form-group">
@@ -74,22 +72,22 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class=".col-md-8 col-md-offset-2">
 
-                            <div class="col-md-8 col-md-offset-2">
-                                <div class="form-group col-md-7 pull-left control-label">
+                                <a href="{{route('home.index')}}" class="btn btn-primary">Back</a>
+
+
                                     <input type="submit" value="Save changes" class="btn btn-primary">
-                            {{ csrf_field() }}
+                                    {{ csrf_field() }}
+                                    </form>
 
-                        </form>
 
-                    </div>
-                    <form action="home" method="get">
-                        <div class="form-group col-md-6 pull-right control-label">
 
-                            <input type="submit" value="Back" class="btn btn-primary">
-                            {{csrf_field()}}
+
+
                         </div>
-                    </form>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
