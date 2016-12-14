@@ -21,8 +21,8 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div id="kalendarz" class="col-lg-9 col-md-offset-2">
-                            <br><br><br>
+                        <div id="kalendarz" align="center" class="col-md-9 ">
+                            <br><br>
                             {!! $calendar->calendar() !!}
                             {!! $calendar->script() !!}
                             <br>

@@ -6799,6 +6799,7 @@ footer{
 
     box-shadow: 12px 12px 12px 12px #1f3d4c;
 }
-div#kalendarz{
+div#kalendarz {
     z-index: 0;
+    width: 100%;
 }
