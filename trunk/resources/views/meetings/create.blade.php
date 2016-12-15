@@ -32,7 +32,6 @@
                             <label for="private">Private</label>
                             <input type="checkbox" name="private" value="private" />
                             <br>
-                            <input type="text" name="secondUserExist" value="" hidden>
                             <input type="text" name="user2_id" value="{{$id}}" hidden>
                             <input type="text" name="start" value="" hidden>
                             <input type="text" name="end" value="" hidden>

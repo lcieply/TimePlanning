@@ -26,6 +26,7 @@ class MeetingController extends Controller
      */
     public function create($id)
     {
+        if(!User::find($id)) abort(404);
         return view('meetings.create')->with('id', $id);
     }
 
@@ -40,7 +41,6 @@ class MeetingController extends Controller
         $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
         $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
 
-        (User::find($_POST['user2_id'])) ?  $request->merge(array('secondUserExist' =>  1)) : $request->merge(array('secondUserExist' =>  0));
         $request->merge(array('start' =>  $start));
         $request->merge(array('end' =>  $end));
 
