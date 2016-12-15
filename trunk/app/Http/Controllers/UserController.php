@@ -95,9 +95,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
-            'surname' => 'required|max:255',
-            'city' => 'max:255',
+            'name' => 'required|max:255|alpha',
+            'surname' => 'required|max:255|alpha',
+            'city' => 'max:255|alpha',
             'address' => 'max:255',
             'phone' => 'digits_between:1,9',
         ]);
