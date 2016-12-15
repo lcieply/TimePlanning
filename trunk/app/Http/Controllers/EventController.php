@@ -49,10 +49,11 @@ class EventController extends Controller
 
         \DB::table('events')->insert([
             'user_id' => User::id(),
-            'title' => $_POST['title'],
-            'description' => $_POST['description'],
+            'title' => $request->title,
+            'description' => $request->description,
             'start_time' => $start,
-            'end_time' => $end
+            'end_time' => $end,
+            'private' => $request->private
         ]);
 
         return redirect()->route('home.index');

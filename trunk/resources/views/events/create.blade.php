@@ -18,43 +18,50 @@
                     <div class="panel-body">
                         <form action="{{route('events.store')}}" method="post" form-horizontal class="form-horizontal">
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">Title</label>
+                                <label for="title" class="col-md-4 control-label">Title</label>
                                 <div class="col-md-6">
                                     <input type="text" name="title" class="form-control" value="{{ old('title') }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">Description</label>
+                                <label for="description" class="col-md-4 control-label">Description</label>
                                 <div class="col-md-6">
                                     <input type="text" name="description" class="form-control" value="{{ old('description') }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">Start date</label>
+                                <label for="start_date" class="col-md-4 control-label">Start date</label>
                                 <div class="col-md-6">
                                     <input type="date" name="start_date" class="form-control"
                                            value="{{ old('start_date') }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">Start time</label>
+                                <label for="start_time" class="col-md-4 control-label">Start time</label>
                                 <div class="col-md-6">
                                     <input type="time" name="start_time" class="form-control"
                                            value="{{ old('start_time') }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">End date</label>
+                                <label for="end_date" class="col-md-4 control-label">End date</label>
                                 <div class="col-md-6">
                                     <input type="date" name="end_date" class="form-control"
                                            value="{{ old('end_date') }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">End time</label>
+                                <label for="end_time" class="col-md-4 control-label">End time</label>
                                 <div class="col-md-6">
                                     <input type="time" name="end_time" class="form-control"
                                            value="{{ old('end_time') }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-md-4 control-label">Private</label>
+                                <div class="col-md-6">
+                                    <input type="hidden" value="0" name="private"/>
+                                    <input type="checkbox" value="1" name="private"/>
                                 </div>
                             </div>
 
