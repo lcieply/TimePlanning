@@ -39,29 +39,43 @@
                                     <div class="form-group">
                                         <input name="end_time" class="form-control" VALUE="{{ $event->end_time  }} "
                                                size="20" readonly>
-
+                                    </div>
+                                </div>
+                                @if($user==$event->user_id)
+                                    <label for="private" class="col-md-4 control-label">Private: </label>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-md-offset-1">
+                                                <input name="private" type="checkbox" @if($event->private ) checked
+                                                       @endif disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <br>
                                         <div class="col-md-6  col-md-offset-2">
                                             @if($user==$event->user_id)
-                                            <a href="{{route('home.index')}}" value="home"
-                                               class="btn btn-primary pull-left">Back</a>
-                                            <a href="{{route('events.edit', $event)}}" value="Edit"
-                                               class="btn btn-primary  ">Edit</a>
+                                                <a href="{{route('home.index')}}" value="home"
+                                                   class="btn btn-primary pull-left">Back</a>
+                                                <a href="{{route('events.edit', $event)}}" value="Edit"
+                                                   class="btn btn-primary  ">Edit</a>
                                             @else
                                                 <a href="{{url()->previous()}}" value="home"
                                                    class="btn btn-primary pull-left">Back</a>
                                             @endif
                                         </div>
                                         @if($user==$event->user_id)
-                                        <div class="col-md-2 ">
+                                            <div class="col-md-2 ">
 
-                                            <form action="{{route('events.destroy', $event)}}" method="post"
-                                                  form-horizontal class="form-horizontal">
-                                                <input type="submit" value="Delete" class="btn btn-primary ">
-                                                {{csrf_field()}}
-                                                {{method_field('DELETE')}}
-                                            </form>
-                                        </div>
+                                                <form action="{{route('events.destroy', $event)}}" method="post"
+                                                      form-horizontal class="form-horizontal">
+                                                    <input type="submit" value="Delete" class="btn btn-primary ">
+                                                    {{csrf_field()}}
+                                                    {{method_field('DELETE')}}
+                                                </form>
+                                            </div>
                                         @endif
                                     </div>
                                 </div>
