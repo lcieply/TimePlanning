@@ -39,7 +39,7 @@
                                     <br>
                                     <div class="col-md-6  col-md-offset-2">
                                         @if($user==$meeting->user_id || $user==$meeting->user2_id)
-                                            <a href="{{route('home.index')}}" value="home"
+                                            <a href="{{url()->previous()}}" value="home"
                                                class="btn btn-primary pull-left">Back</a>
                                             <a href="{{route('meetings.edit', $meeting)}}" value="Edit"
                                                class="btn btn-primary  ">Edit</a>
