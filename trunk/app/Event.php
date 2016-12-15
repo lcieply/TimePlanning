@@ -15,7 +15,6 @@ class Event extends Model implements \MaddHatter\LaravelFullcalendar\Event
     public static function rules() {
         return [
             'start' => 'before:end',
-            'description' => 'required',
             'title' => 'required',
             'start_date' => 'date|required',
             'start_time' => 'required',
