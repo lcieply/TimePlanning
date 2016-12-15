@@ -11,7 +11,17 @@ class Meeting extends Model implements \MaddHatter\LaravelFullcalendar\Event
     protected $fillable = [
         'title', 'start_time', 'end_time', 'allday', 'private'
     ];
-
+    public static function rules() {
+        return [
+            'second_user' => 'accepted',
+            'start' => 'before:end',
+            'user_id' => 'required',
+            'start_date' => 'date|required',
+            'start_time' => 'required',
+            'end_date' => 'date|required',
+            'end_time' => 'required',
+        ];
+    }
     public function getId()
     {
         return $this->id;

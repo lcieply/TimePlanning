@@ -15,6 +15,33 @@
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">New Meeting</div>
+                    <div>
+                        <form action="{{route('meetings.store')}}" method="post">
+                            <label for="user_id">User_id</label>
+                            <input type="text" name="user_id" value="{{ old('user_id') }}">
+                            <br>
+                            <label for="start_date">Start date</label>
+                            <input type="date" name="start_date" value="{{ old('start_date') }}">
+                            <br>
+                            <label for="start_time">Start time</label>
+                            <input type="time" name="start_time" value="{{ old('start_time') }}">
+                            <br>
+                            <label for="end_date">End date</label>
+                            <input type="date" name="end_date" value="{{ old('end_date') }}">
+                            <br>
+                            <label for="end_time">End time</label>
+                            <input type="time" name="end_time" value="{{ old('end_time') }}">
+                            <br>
+                            <label for="private">Private</label>
+                            <input type="checkbox" name="private" value="private" />
+                            <br>
+                            <input type="text" name="second_user" value="" hidden>
+                            <input type="text" name="start" value="" hidden>
+                            <input type="text" name="end" value="" hidden>
+                            <input type="submit" value="Create" class="btn btn-primary pull-right">
+                            {{csrf_field()}}
+                        </form>
+                    </div>
                     <div class="panel-body">
 
                     </div>
