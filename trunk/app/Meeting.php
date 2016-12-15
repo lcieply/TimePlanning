@@ -13,9 +13,9 @@ class Meeting extends Model implements \MaddHatter\LaravelFullcalendar\Event
     ];
     public static function rules() {
         return [
-            'second_user' => 'accepted',
+            'secondUserExist' => 'accepted',
             'start' => 'before:end',
-            'user_id' => 'required',
+            'user2_id' => 'required',
             'start_date' => 'date|required',
             'start_time' => 'required',
             'end_date' => 'date|required',

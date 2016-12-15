@@ -40,7 +40,7 @@ class MeetingController extends Controller
         $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
         $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
 
-        (User::find($_POST['user_id'])) ?  $request->merge(array('second_user' =>  1)) : $request->merge(array('second_user' =>  0));
+        (User::find($_POST['user2_id'])) ?  $request->merge(array('secondUserExist' =>  1)) : $request->merge(array('secondUserExist' =>  0));
         $request->merge(array('start' =>  $start));
         $request->merge(array('end' =>  $end));
 
@@ -51,7 +51,7 @@ class MeetingController extends Controller
 
         \DB::table('meetings')->insert([
             'user_id' => User::id(),
-            'user2_id' => $_POST['user_id'],
+            'user2_id' => $_POST['user2_id'],
             'start_time' => $start,
             'end_time' => $end,
             'private' => $check
