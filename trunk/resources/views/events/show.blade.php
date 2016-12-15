@@ -11,55 +11,66 @@
                         <div class="form-group">
                             <label for="title" class="col-md-4 control-label">Title: </label>
                             <div class="col-md-6">
-                            <div class="form-group">
-                                <input name="title" class="form-control" VALUE=" {{ $event->title  }}" size="20" readonly>
-                            </div>
+                                <div class="form-group">
+                                    <input name="title" class="form-control" VALUE=" {{ $event->title  }}" size="20"
+                                           readonly>
                                 </div>
+                            </div>
                             <div class="form-group">
                                 <label for="name" class="col-md-4 control-label">Name: </label>
                                 <div class="col-md-6">
-                            <div class="form-group">
-                                <input  name="name" class="form-control" VALUE=" {{ $event->name  }}" size="20" readonly>
+                                    <div class="form-group">
+                                        <input name="name" class="form-control" VALUE=" {{ $event->name  }}" size="20"
+                                               readonly>
 
-                            </div>
                                     </div>
+                                </div>
                                 <label for="start_time" class="col-md-4 control-label">Start time: </label>
                                 <div class="col-md-6">
                                     <div class="form-group">
 
-                                <input  name="start_time" class="form-control" VALUE="{{ $event->start_time  }} " size="20" readonly>
+                                        <input name="start_time" class="form-control" VALUE="{{ $event->start_time  }} "
+                                               size="20" readonly>
 
-                            </div>
+                                    </div>
+                                </div>
+                                <label for="end_time" class="col-md-4 control-label">End time: </label>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input name="end_time" class="form-control" VALUE="{{ $event->end_time  }} "
+                                               size="20" readonly>
+
+                                        <br>
+                                        <div class="col-md-6  col-md-offset-2">
+                                            @if($user==$event->user_id)
+                                            <a href="{{route('home.index')}}" value="home"
+                                               class="btn btn-primary pull-left">Back</a>
+                                            <a href="{{route('events.edit', $event)}}" value="Edit"
+                                               class="btn btn-primary  ">Edit</a>
+                                            @else
+                                                <a href="{{url()->previous()}}" value="home"
+                                                   class="btn btn-primary pull-left">Back</a>
+                                            @endif
                                         </div>
-                         <label for="end_time" class="col-md-4 control-label">End time: </label>
-                          <div class="col-md-6">
-                            <div class="form-group">
-                                <input name="end_time" class="form-control" VALUE="{{ $event->end_time  }} " size="20" readonly>
+                                        @if($user==$event->user_id)
+                                        <div class="col-md-2 ">
 
-<br>
-                                <div class="col-md-6  col-md-offset-2">
-
-                        <a href="{{route('home.index')}}" value="home" class="btn btn-primary pull-left">Back</a>
-
-                                <a href="{{route('events.edit', $event)}}" value="Edit" class="btn btn-primary  ">Edit</a>
-                        </div>
-
-                        <div class="col-md-2 ">
-
-    <form action="{{route('events.destroy', $event)}}" method="post" form-horizontal class="form-horizontal">
-                              <input  type="submit" value="Delete" class="btn btn-primary ">
-                            {{csrf_field()}}
-                            {{method_field('DELETE')}}
-                            </form>
-                    </div>
+                                            <form action="{{route('events.destroy', $event)}}" method="post"
+                                                  form-horizontal class="form-horizontal">
+                                                <input type="submit" value="Delete" class="btn btn-primary ">
+                                                {{csrf_field()}}
+                                                {{method_field('DELETE')}}
+                                            </form>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-   </div>
-        </div>
     <br><br>
 @endsection

@@ -9,7 +9,7 @@ class Event extends Model implements \MaddHatter\LaravelFullcalendar\Event
     protected $dates = ['start_time', 'end_time'];
 
     protected $fillable = [
-      'name', 'title', 'start_time', 'end_time', 'allday'
+      'name', 'title', 'start_time', 'end_time', 'allday', 'private'
     ];
 
     public static function rules() {
