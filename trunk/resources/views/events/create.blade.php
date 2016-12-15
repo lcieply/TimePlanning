@@ -24,9 +24,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">Name</label>
+                                <label for="name" class="col-md-4 control-label">Description</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                                    <input type="text" name="description" class="form-control" value="{{ old('description') }}">
                                 </div>
                             </div>
                             <div class="form-group">

@@ -17,10 +17,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">Name: </label>
+                                <label for="name" class="col-md-4 control-label">Description: </label>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input name="name" class="form-control" VALUE=" {{ $event->name  }}" size="20"
+                                        <input name="description" class="form-control" VALUE=" {{ $event->description  }}" size="20"
                                                readonly>
 
                                     </div>

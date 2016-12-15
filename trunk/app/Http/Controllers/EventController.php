@@ -48,11 +48,11 @@ class EventController extends Controller
         $this->validate($request, Event::rules());
 
         \DB::table('events')->insert([
-                'name' => $_POST['name'],
-                'user_id' => User::id(),
-                'title' => $_POST['title'],
-                'start_time' => $start,
-                'end_time' => $end
+            'user_id' => User::id(),
+            'title' => $_POST['title'],
+            'description' => $_POST['description'],
+            'start_time' => $start,
+            'end_time' => $end
         ]);
 
         return redirect()->route('home.index');
@@ -97,7 +97,7 @@ class EventController extends Controller
 
         $event->update([
             'title' => $request->title,
-            'name' => $request->name,
+            'description' => $request->description,
             'start_time' => $start,
             'end_time' => $end,
         ]);
