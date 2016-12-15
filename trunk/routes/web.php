@@ -31,6 +31,10 @@ Route::resource('home', 'HomeController');
 Route::resource('mettingsInfo', 'MeetingsInfoController');
 Route::resource('events', 'EventController');
 Route::resource('meetings', 'MeetingController');
+Route::get('/meetings/create/{id}', [
+    'uses' => 'MeetingController@create',
+    'as' => 'meetings.create'
+]);
 Route::resource('plansView', 'PlansViewController');
 Route::get('/manageAccount', 'Auth\ManageAccountController@index');
 Route::post('/manageAccount/update', [

@@ -17,9 +17,6 @@
                     <div class="panel-heading">New Meeting</div>
                     <div>
                         <form action="{{route('meetings.store')}}" method="post">
-                            <label for="user_id">User2_id</label>
-                            <input type="text" name="user2_id" value="{{ old('user2_id') }}">
-                            <br>
                             <label for="start_date">Start date</label>
                             <input type="date" name="start_date" value="{{ old('start_date') }}">
                             <br>
@@ -36,6 +33,7 @@
                             <input type="checkbox" name="private" value="private" />
                             <br>
                             <input type="text" name="secondUserExist" value="" hidden>
+                            <input type="text" name="user2_id" value="{{$id}}" hidden>
                             <input type="text" name="start" value="" hidden>
                             <input type="text" name="end" value="" hidden>
                             <input type="submit" value="Create" class="btn btn-primary pull-right">

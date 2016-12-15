@@ -24,9 +24,9 @@ class MeetingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('meetings.create');
+        return view('meetings.create')->with('id', $id);
     }
 
     /**

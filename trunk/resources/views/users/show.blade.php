@@ -64,7 +64,7 @@
                             <br>
                             <div class="col-md-8 col-md-offset-2">
                                 <a href="{{url()->previous()}}" value="home" class="btn btn-primary pull-left">Back</a>
-                                <a href="{{route('meetings.create')}}" class="btn btn-primary  ">New meeting</a>
+                                <a href="{{route('meetings.create', $user->id)}}" class="btn btn-primary  ">New meeting</a>
                                 <br><br>
 
                             </div>
