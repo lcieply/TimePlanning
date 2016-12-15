@@ -29,8 +29,14 @@ class Meeting extends Model implements \MaddHatter\LaravelFullcalendar\Event
 
     public function getTitle()
     {
-        return "Meeting " . User::find($this->user_id)->surname . " - "
-                            . User::find($this->user2_id)->surname;
+        return "Meeting " .
+            User::find($this->user_id)->name .
+            " ".
+            User::find($this->user_id)->surname .
+            " - " .
+            User::find($this->user2_id)->name .
+            " " .
+            User::find($this->user2_id)->surname;
     }
 
     public function isAllDay()

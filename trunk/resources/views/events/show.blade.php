@@ -17,7 +17,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">Description: </label>
+                                <label for="description" class="col-md-4 control-label">Description: </label>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input name="description" class="form-control" VALUE=" {{ $event->description  }}" size="20"
