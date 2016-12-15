@@ -12,13 +12,15 @@ class Meeting extends Model implements \MaddHatter\LaravelFullcalendar\Event
         'title', 'start_time', 'end_time', 'allday', 'private'
     ];
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     public function getTitle()
     {
-        return "Meeting";
+        return "Meeting " . User::find($this->user_id)->surname . " - "
+                            . User::find($this->user2_id)->surname;
     }
 
     public function isAllDay()
