@@ -37,7 +37,8 @@ Route::get('/meetings/create/{id}', [
 ]);
 Route::resource('plansView', 'PlansViewController');
 Route::get('/manageAccount', 'Auth\ManageAccountController@index');
+Route::resource('/manageAccount', 'UserController');
 Route::post('/manageAccount/update', [
-    'uses' => 'Auth\ManageAccountController@save',
+    'uses' => 'UserController@update',
     'as' => 'users.update'
 ]);

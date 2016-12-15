@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +16,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+       $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $user = Auth::user();
+        return view('users.edit')->withUser($user);
     }
 
     /**
@@ -85,9 +92,32 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'surname' => 'required|max:255',
+            'city' => 'max:255',
+            'address' => 'max:255',
+            'phone' => 'digits_between:1,9',
+        ]);
+
+        $name = $request['name'];
+        $surname = $request['surname'];
+        $city = $request['city'];
+        $address = $request['address'];
+        $phone = $request['phone'];
+        DB::table('users')
+            ->where('id', $user->id())
+            ->update([
+                'name' => $name,
+                'surname' => $surname,
+                'city' => $city,
+                'address' => $address,
+                'phone' => $phone,
+            ]);
+
+        return redirect()->back();
     }
 
     /**
