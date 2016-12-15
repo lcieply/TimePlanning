@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Event;
 
@@ -48,7 +49,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $events = Event::where([['user_id','=', $user->id],['private','=',false]])->get();
+        if($user->id == Auth::id())
+            $statement = [['user_id','=', $user->id]];
+        else
+            $statement = [['user_id','=', $user->id],['private','=',false]];
+
+        $events = Event::where($statement)->get();
+
         $calendar = \Calendar::addEvents($events);
 
         return view('users.show', compact('calendar'))->withUser($user);
