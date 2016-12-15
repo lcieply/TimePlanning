@@ -71,7 +71,7 @@
 
                                                 <form action="{{route('events.destroy', $event)}}" method="post"
                                                       form-horizontal class="form-horizontal">
-                                                    <input type="submit" value="Delete" class="btn btn-primary ">
+                                                    <input type="submit" value="Delete" class="btn btn-primary " onclick="return confirm('Are you sure you want to delete event?')">
                                                     {{csrf_field()}}
                                                     {{method_field('DELETE')}}
                                                 </form>
