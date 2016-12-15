@@ -100,6 +100,7 @@ class EventController extends Controller
             'description' => $request->description,
             'start_time' => $start,
             'end_time' => $end,
+            'private' => $request->private,
         ]);
 
         return redirect()->route('events.show', $event);
