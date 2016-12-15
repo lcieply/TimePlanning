@@ -24,12 +24,40 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{$user->name}} {{$user->surname}}</div>
                     <div class="panel-body">
-                        <div class="form-group">
-                            Adres e-mail: {{$user->email}}<br>
-                            Miasto: {{$user->city}}<br>
-                            Adres: {{$user->address}}<br>
-                            Telefon: {{$user->phone}}
-                            <div class="col-md-10  col-md-offset-1">
+
+
+                           <label for="email" class="col-md-4 control-label">   Adres e-mail: </label>
+                                <div class="col-md-6">
+                            <input name="title" class="form-control" VALUE=" {{$user->email}}" size="10"readonly><br>
+
+</div>
+
+                                    <label for="city" class="col-md-4 control-label">   Miasto: </label>
+                                    <div class="col-md-6">
+
+                                    <input name="city" class="form-control" VALUE=" {{$user->city}}" size="10"readonly><br>
+
+
+                        </div>
+
+
+                       <label for="address" class="col-md-4 control-label">   Adres: </label>
+                                <div class="col-md-6">
+                                    <input name="address" class="form-control" VALUE=" {{$user->address}}" size="10"readonly><br>
+
+                         
+
+                        </div>
+
+                                    <label for="email" class="col-md-4 control-label">   Telefon: </label>
+                                <div class="col-md-6">
+                                    <input name="title" class="form-control" VALUE=" {{$user->phone}}" size="10"readonly><br>
+
+
+                        </div>
+
+
+                            <div id="kalendarz"  class="col-md-9 ">
                                     <br>
                                     {!! $calendar->calendar() !!}
                                     {!! $calendar->script() !!}
@@ -38,7 +66,7 @@
                                         <a href="{{url()->previous()}}" value="home" class="btn btn-primary pull-left">Back</a>
                                         <a href="{{route('meetings.create')}}" class="btn btn-primary  ">New meeting</a>
                                         <br><br>
-                                    </div>
+
                             </div>
                         </div>
                     </div>
