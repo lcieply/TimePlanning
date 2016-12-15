@@ -30,6 +30,7 @@ Route::post('/users/search', [
 Route::resource('home', 'HomeController');
 Route::resource('mettingsInfo', 'MeetingsInfoController');
 Route::resource('events', 'EventController');
+Route::resource('meetings', 'MeetingController');
 Route::resource('plansView', 'PlansViewController');
 Route::get('/manageAccount', 'Auth\ManageAccountController@index');
 Route::post('/manageAccount/update', [

@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Event;
 use App\Meeting;
 
-class UserController extends Controller
+class MeetingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('meetings.create');
     }
 
     /**
@@ -48,23 +45,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Meeting $meeting)
     {
-        if($user->id == Auth::id()) {
-            $statement = [['user_id','=', $user->id]];
-            $orStatement = [['user2_id','=', $user->id]];
-        }
-        else {
-            $statement = [['user_id','=', $user->id],['private','=',false]];
-            $orStatement = [['user2_id','=', $user->id],['private','=',false]];
-        }
-
-        $events = Event::where($statement)->get();
-        $meetings = Meeting::where($statement)->orWhere($orStatement)->get();
-
-        $calendar = \Calendar::addEvents($events)->addEvents($meetings);
-
-        return view('users.show', compact('calendar'))->withUser($user);
+        return view('meetings.show')->withMeeting($meeting)->withUser(Auth::id());
     }
 
     /**
@@ -73,9 +56,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Meeting $meeting)
     {
-        //
+        return view('meetings.edit')->withMeeting($meeting);
     }
 
     /**
@@ -85,7 +68,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Meeting $meeting)
     {
         //
     }
@@ -96,13 +79,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Meeting $meeting)
     {
-        //
-    }
+        $meeting->delete();
 
-    public function search(Request $request)
-    {
-        //
+        return redirect()->route('home.index');
     }
 }
