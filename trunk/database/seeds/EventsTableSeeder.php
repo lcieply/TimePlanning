@@ -15,12 +15,42 @@ class EventsTableSeeder extends Seeder
 
         DB::table('events')->insert([
             'user_id' => '1',
-            'name' => 'Sample event',
-            'title' => 'Sample event',
+            'name' => 'Public event',
+            'title' => 'Public event',
             'allday' => true,
-            'start_time' => '2016-12-06',
-            'end_time' => '2016-12-06',
+            'start_time' => '2016-12-15',
+            'end_time' => '2016-12-15',
             'private' => false,
+        ]);
+
+        DB::table('events')->insert([
+            'user_id' => '1',
+            'name' => 'Private event',
+            'title' => 'Private event',
+            'allday' => true,
+            'start_time' => '2016-12-18',
+            'end_time' => '2016-12-18',
+            'private' => true,
+        ]);
+
+        DB::table('events')->insert([
+            'user_id' => '2',
+            'name' => 'Public event',
+            'title' => 'Public event',
+            'allday' => true,
+            'start_time' => '2016-12-17',
+            'end_time' => '2016-12-17',
+            'private' => false,
+        ]);
+
+        DB::table('events')->insert([
+            'user_id' => '2',
+            'name' => 'Private event',
+            'title' => 'Private event',
+            'allday' => true,
+            'start_time' => '2016-12-20',
+            'end_time' => '2016-12-20',
+            'private' => true,
         ]);
     }
 }
