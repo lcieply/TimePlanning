@@ -110,6 +110,7 @@
 
                                     <input type="submit" value="Save changes" class="btn btn-primary">
                                     {{ csrf_field() }}
+                                    {{method_field('PATCH')}}
                                     </form>
                         </div>
                     </div>

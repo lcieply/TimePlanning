@@ -79,13 +79,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        if($id != Auth::user()->id)
-            return view('errors.503');
-        else
-            $user = Auth::user();
-            return view('users.edit')->withUser($user);
+        if($user->id != Auth::id())
+            abort(404);
+
+        return view('users.edit')->withUser($user);
     }
 
     /**
