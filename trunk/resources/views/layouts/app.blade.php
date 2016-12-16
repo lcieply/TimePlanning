@@ -87,7 +87,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ url('/manageAccount') }}">
+                                    <a href="{{ route('users.edit', Auth::id()) }}">
                                         MANAGE ACCOUNT
                                     </a>
 

@@ -24,8 +24,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-        return view('users.edit')->withUser($user);
+        //
     }
 
     /**
@@ -82,7 +81,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if($id != Auth::user()->id)
+            return view('errors.503');
+        else
+            $user = Auth::user();
+            return view('users.edit')->withUser($user);
     }
 
     /**
@@ -102,11 +105,11 @@ class UserController extends Controller
             'phone' => 'digits_between:1,9',
         ]);
 
-        $name = $request['name'];
-        $surname = $request['surname'];
-        $city = $request['city'];
-        $address = $request['address'];
-        $phone = $request['phone'];
+        $name = $request->name;
+        $surname = $request->surname;
+        $city = $request->city;
+        $address = $request->address;
+        $phone = $request->phone;
         DB::table('users')
             ->where('id', $user->id())
             ->update([
