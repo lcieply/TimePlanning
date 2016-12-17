@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{$meeting->getTitle()}}</div>
+                    <div class="panel-heading"><a href = "{{route("home.index")}}">{{$meeting->getTitleToUser()}}</a> <a href = "{{route("users.show", $meeting->getSecondUserId())}}">{{$meeting->getTitleToSecondUser()}}</a></div>
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="start_time" class="col-md-4 control-label">Start time: </label>
