@@ -119,8 +119,8 @@ class MeetingController extends Controller
         return redirect()->route('home.index');
     }
 
-    public function search(Request $request)
+    public function search(Request $request, $id)
     {
-        //
+        return redirect()->route('meetings.create', $id);
     }
 }

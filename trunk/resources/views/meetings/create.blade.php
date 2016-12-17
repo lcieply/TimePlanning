@@ -74,20 +74,20 @@
                             </div>
                             <div class="col-md-4 ">
                                 <h4>Let me do that for you</h4>
-                                <form action="{{route('meetings.search')}}" method="post">
+                                <form action="{{route('meetings.search', $id)}}" method="post">
                                     <div>
                                         <label for="date">Date</label>
-                                        <input type="date" name="date" value="">
+                                        <input type="date" name="date" value="{{ old('date') }}">
                                     </div>
                                     <div>
                                         <label for="time">Between</label>
-                                        <input type="time" name="time" value="">
+                                        <input type="time" name="time" value="{{ old('time') }}">
                                         <label for="time2">and</label>
-                                        <input type="time" name="time2" value="">
+                                        <input type="time" name="time2" value="{{ old('time2') }}">
                                     </div>
                                     <div>
                                         <label for="duration">Duration</label>
-                                        <input type="time" name="duration" value="">
+                                        <input type="time" name="duration" value="{{ old('duration') }}">
                                     </div>
                                     <div>
                                         <input type="submit" value="Search" class="btn btn-primary pull-right">
