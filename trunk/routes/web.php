@@ -39,3 +39,6 @@ Route::post('meetings/search/{id}', [
     'as' => 'meetings.search'
 ]);
 Route::resource('plansView', 'PlansViewController');
+
+
+

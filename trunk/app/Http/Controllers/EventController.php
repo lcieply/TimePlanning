@@ -150,6 +150,7 @@ class EventController extends Controller
     {
         $event->delete();
 
-        return redirect()->route('home.index');
+
+        return redirect()->route('users.search');
     }
 }
