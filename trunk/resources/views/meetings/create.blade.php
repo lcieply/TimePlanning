@@ -68,10 +68,12 @@
                                         <input type="submit" value="Create" class="btn btn-primary pull-right">
                                         {{csrf_field()}}
                                     </div>
+
                                 </form>
                             </div>
                             <div class="col-md-3">
                                 <h3>or</h3>
+                                <a href="{{url()->previous()}}" value="Back">Back</a>
                             </div>
                             <div class="col-md-4 ">
                                 <h4>Let me do that for you</h4>
@@ -95,6 +97,8 @@
                                         {{csrf_field()}}
                                     </div>
                                 </form>
+
+
                             </div>
                         </div>
                     </div>
