@@ -32,6 +32,9 @@
                     <div class="panel-heading">New Meeting</div>
                     <div>
                         <form action="{{route('meetings.store')}}" method="post">
+                            <label for="allday">All day</label>
+                            <input type="checkbox" id="allDayCheck" name="allday" value="allday" onclick="hideElements()" />
+                            <br>
                             <label for="start_date">Start date</label>
                             <input type="date" name="start_date" value="{{ old('start_date') }}">
                             <br>
@@ -46,9 +49,6 @@
                             <br>
                             <label for="private">Private</label>
                             <input type="checkbox" name="private" value="private" />
-                            <br>
-                            <label for="allday">All day</label>
-                            <input type="checkbox" id="allDayCheck" name="allday" value="allday" onclick="hideElements()" />
                             <br>
                             <input type="text" name="user2_id" value="{{$id}}" hidden>
                             <input type="text" name="start" value="" hidden>
