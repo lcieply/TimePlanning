@@ -22,7 +22,12 @@ class Event extends Model implements \MaddHatter\LaravelFullcalendar\Event
             'end_time' => 'required',
         ];
     }
-
+    public static function rulesAllDay() {
+        return [
+            'title' => 'required',
+            'start_date' => 'date|required',
+        ];
+    }
     public function getId() {
         return $this->id;
     }
