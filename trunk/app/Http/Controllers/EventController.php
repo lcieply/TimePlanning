@@ -52,7 +52,8 @@ class EventController extends Controller
                 'description' => $request->description,
                 'start_time' => $start,
                 'end_time' => $start,
-                'private' => $request->private
+                'private' => $request->private,
+                'allday' => 1
             ]);
         }else{
             $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
@@ -67,7 +68,8 @@ class EventController extends Controller
                 'description' => $request->description,
                 'start_time' => $start,
                 'end_time' => $end,
-                'private' => $request->private
+                'private' => $request->private,
+                'allday' => 0
             ]);
         }
         return redirect()->route('home.index');
