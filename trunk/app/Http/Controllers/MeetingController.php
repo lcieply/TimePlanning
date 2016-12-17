@@ -38,24 +38,40 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-        $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
-        $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
+        if(isset($_POST['allday'])){
+            $start = str_replace('.', '-', $_POST['start_date'].' 00:00:00');
+            $request->merge(array('start' =>  $start));
+            $this->validate($request, Meeting::rulesAllDay());
+            $check = 0;
+            if(isset($_POST['private'])) $check = 1;
 
-        $request->merge(array('start' =>  $start));
-        $request->merge(array('end' =>  $end));
+            \DB::table('meetings')->insert([
+                'user_id' => User::id(),
+                'user2_id' => $_POST['user2_id'],
+                'start_time' => $start,
+                'end_time' => $start,
+                'private' => $check,
+                'allday' => 1
+            ]);
+        }else{
+            $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
+            $request->merge(array('start' =>  $start));
+            $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
+            $request->merge(array('end' =>  $end));
+            $this->validate($request, Meeting::rules());
+            $check = 0;
+            if(isset($_POST['private'])) $check = 1;
 
-        $this->validate($request, Meeting::rules());
+            \DB::table('meetings')->insert([
+                'user_id' => User::id(),
+                'user2_id' => $_POST['user2_id'],
+                'start_time' => $start,
+                'end_time' => $end,
+                'private' => $check,
+                'allday' => 0
+            ]);
+        }
 
-        $check = 0;
-        if(isset($_POST['private'])) $check = 1;
-
-        \DB::table('meetings')->insert([
-            'user_id' => User::id(),
-            'user2_id' => $_POST['user2_id'],
-            'start_time' => $start,
-            'end_time' => $end,
-            'private' => $check
-        ]);
 
         return redirect()->route('home.index');
     }

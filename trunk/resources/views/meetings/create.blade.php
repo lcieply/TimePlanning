@@ -1,4 +1,19 @@
 @extends('layouts.app')
+@section('script')
+    <script type="text/javascript">
+        function hideElements()
+        {
+                if(document.getElementById("allDayCheck").checked) {
+                    $(".toHide").attr('disabled', true);
+                    $(".toHide").attr('hidden', true);
+                }else{
+                    $(".toHide").attr('disabled', false);
+                    $(".toHide").attr('hidden', false);
+                }
+
+        }
+    </script>
+@endsection
 @section('content')
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}"/>
     <br><br><br><br>
@@ -20,17 +35,20 @@
                             <label for="start_date">Start date</label>
                             <input type="date" name="start_date" value="{{ old('start_date') }}">
                             <br>
-                            <label for="start_time">Start time</label>
-                            <input type="time" name="start_time" value="{{ old('start_time') }}">
+                            <label for="start_time" class = "toHide">Start time</label>
+                            <input type="time" name="start_time" class = "toHide" value="{{ old('start_time') }}">
                             <br>
-                            <label for="end_date">End date</label>
-                            <input type="date" name="end_date" value="{{ old('end_date') }}">
+                            <label for="end_date" class = "toHide">End date</label>
+                            <input type="date" name="end_date" class = "toHide" value="{{ old('end_date') }}">
                             <br>
-                            <label for="end_time">End time</label>
-                            <input type="time" name="end_time" value="{{ old('end_time') }}">
+                            <label for="end_time" class = "toHide">End time</label>
+                            <input type="time" name="end_time" class = "toHide" value="{{ old('end_time') }}">
                             <br>
                             <label for="private">Private</label>
                             <input type="checkbox" name="private" value="private" />
+                            <br>
+                            <label for="allday">All day</label>
+                            <input type="checkbox" id="allDayCheck" name="allday" value="allday" onclick="hideElements()" />
                             <br>
                             <input type="text" name="user2_id" value="{{$id}}" hidden>
                             <input type="text" name="start" value="" hidden>
