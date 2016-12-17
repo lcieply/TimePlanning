@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="private" class="col-md-4 control-label">All day</label>
+                                <label for="allday" class="col-md-4 control-label">All day</label>
                                 <div class="col-md-6">
                                     <input type="hidden" value="0" name="allday"/>
                                     <input type="checkbox" value="1" name="allday" id="allDayCheck" onclick="hideElements()" @if($event->allday ) checked
