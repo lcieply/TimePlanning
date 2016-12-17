@@ -51,9 +51,8 @@ class MeetingController extends Controller
 
         $request->merge([['start' => $start], ['end' => $end]]);
 
-        $isFirstUserBusy = $this->isBusy(Auth::id(), $start, $end);
+        $isFirstUserBusy =  $this->isBusy(Auth::id(), $start, $end);
         $isSecondUserBusy = $this->isBusy($request->user2_id, $start, $end);
-
         if ($isFirstUserBusy || $isSecondUserBusy) {
             if ($isFirstUserBusy)
                 $errors[] = "You already have another meeting at this time!";
@@ -153,12 +152,32 @@ class MeetingController extends Controller
 
     private function isBusy($id, $start, $end)
     {
-        $results = DB::select('select count(*) from meetings where 
-                  (user_id = \'' . $id . '\' OR user2_id = \'' . $id . '\') 
-                  AND ( \'' . $start . '\' BETWEEN start_time AND end_time 
-                  OR \'' . $end . '\' BETWEEN start_time AND end_time);');
+        /*
+         * +        $results = DB::select('select count(*) from meetings where
++                  (user_id = \'' . $id . '\' OR user2_id = \'' . $id . '\')
++                  AND ( \'' . $start . '\' BETWEEN start_time AND end_time
++                  OR \'' . $end . '\' BETWEEN start_time AND end_time);');
++
++        return $results == 0 ? false : true;
+         */
+        $resultsMeetings = DB::table('meetings')
+            ->select('*')
+            ->where('user_id', '=', $id)
+            ->whereBetween('start_time', [$start, $end])
+            ->orWhereBetween('end_time', [$start, $end])
+             ->where('user_id', '=', $id)
+            ->get()
+            ->count();
+        $resultsEvents = DB::table('events')
+            ->select('*')
+            ->where('user_id', '=', $id)
+            ->whereBetween('start_time', [$start, $end])
+            ->orWhereBetween('end_time', [$start, $end])
+            ->where('user_id', '=', $id)
+            ->get()
+            ->count();
 
-        return $results == 0 ? false : true;
+        return $resultsEvents + $resultsMeetings;
     }
 
     private function insertIntoDB($user2_id, $start, $end, $private, $allday)

@@ -31,7 +31,7 @@ class Meeting extends Model implements \MaddHatter\LaravelFullcalendar\Event
     {
         return $this->id;
     }
-    
+
     public function getSecondUserId(){
         return $this->user2_id;
     }
