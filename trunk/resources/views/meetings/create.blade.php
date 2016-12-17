@@ -40,8 +40,8 @@
                                     </div>
                                     <div>
                                         <label for="allday">All day</label>
-                                        <input type="checkbox" id="allDayCheck" name="allday" value="allday"
-                                               onclick="hideElements()"/>
+                                        <input type="hidden" value="0" name="allday"/>
+                                        <input type="checkbox" id="allDayCheck" name="allday" value="1" onclick="hideElements()"/>
                                     </div>
                                     <div>
                                         <label for="start_time" class="toHide">Start time</label>
@@ -58,6 +58,7 @@
                                     </div>
                                     <div>
                                         <label for="private">Private</label>
+                                        <input type="hidden" value="0" name="private"/>
                                         <input type="checkbox" name="private" value="private"/>
                                     </div>
                                     <input type="text" name="user2_id" value="{{$id}}" hidden>

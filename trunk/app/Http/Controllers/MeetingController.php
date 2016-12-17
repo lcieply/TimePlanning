@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Meeting;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class MeetingController extends Controller
 {
@@ -26,48 +27,46 @@ class MeetingController extends Controller
      */
     public function create($id)
     {
-        if(!User::find($id)) abort(404);
+        if (!User::find($id)) abort(404);
         return view('meetings.create')->with('id', $id);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if(isset($_POST['allday'])){
-            $start = str_replace('.', '-', $_POST['start_date'].' 00:00:00');
-            $request->merge(array('start' =>  $start));
+        if ($request->allday) {
+            $start = str_replace('.', '-', $_POST['start_date'] . ' 00:00:00');
+            $end = str_replace('.', '-', $_POST['start_date'] . ' 23:59:59');
             $this->validate($request, Meeting::rulesAllDay());
-
-            \DB::table('meetings')->insert([
-                'user_id' => User::id(),
-                'user2_id' => $_POST['user2_id'],
-                'start_time' => $start,
-                'end_time' => $start,
-                'private' => $_POST['private'],
-                'allday' => 1
-            ]);
-        }else{
-            $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
-            $request->merge(array('start' =>  $start));
-            $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
-            $request->merge(array('end' =>  $end));
+        } else {
+            $start = str_replace('.', '-', $_POST['start_date'] . ' ' . $_POST['start_time'] . ':00');
+            $end = str_replace('.', '-', $_POST['end_date'] . ' ' . $_POST['end_time'] . ':00');
             $this->validate($request, Meeting::rules());
-
-            \DB::table('meetings')->insert([
-                'user_id' => User::id(),
-                'user2_id' => $_POST['user2_id'],
-                'start_time' => $start,
-                'end_time' => $end,
-                'private' => $_POST['private'],
-                'allday' => 0
-            ]);
         }
 
+        $request->merge([['start' => $start], ['end' => $end]]);
+
+        $isFirstUserBusy = $this->isBusy(Auth::id(), $start, $end);
+        $isSecondUserBusy = $this->isBusy($request->user2_id, $start, $end);
+
+        if ($isFirstUserBusy || $isSecondUserBusy) {
+            if ($isFirstUserBusy)
+                $errors[] = "You already have another meeting at this time!";
+
+            if ($isSecondUserBusy) {
+                $secondUser = User::find($request->user2_id);
+                $errors[] = $secondUser->name . " " . $secondUser->surname . " already have another meeting at this time!";
+            }
+
+            return redirect()->route('meetings.create', $request->user2_id)->withErrors($errors);
+        }
+
+        $this->insertIntoDB($request->user2_id, $start, $end, $request->private, $request->allday);
 
         return redirect()->route('home.index');
     }
@@ -75,7 +74,7 @@ class MeetingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Meeting $meeting)
@@ -86,7 +85,7 @@ class MeetingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Meeting $meeting)
@@ -97,8 +96,8 @@ class MeetingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Meeting $meeting)
@@ -109,7 +108,7 @@ class MeetingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Meeting $meeting)
@@ -122,5 +121,27 @@ class MeetingController extends Controller
     public function search(Request $request, $id)
     {
         return redirect()->route('meetings.create', $id);
+    }
+
+    private function isBusy($id, $start, $end)
+    {
+        $results = DB::select('select count(*) from meetings where 
+                  (user_id = \'' . $id . '\' OR user2_id = \'' . $id . '\') 
+                  AND ( \'' . $start . '\' BETWEEN start_time AND end_time 
+                  OR \'' . $end . '\' BETWEEN start_time AND end_time);');
+
+        return $results == 0 ? false : true;
+    }
+
+    private function insertIntoDB($user2_id, $start, $end, $private, $allday)
+    {
+        \DB::table('meetings')->insert([
+            'user_id' => User::id(),
+            'user2_id' => $user2_id,
+            'start_time' => $start,
+            'end_time' => $end,
+            'private' => $private,
+            'allday' => $allday
+        ]);
     }
 }
