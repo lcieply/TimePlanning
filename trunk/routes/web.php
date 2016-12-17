@@ -34,4 +34,8 @@ Route::get('/meetings/create/{id}', [
     'uses' => 'MeetingController@create',
     'as' => 'meetings.create'
 ]);
+Route::post('meetings/search', [
+    'uses' => 'MeetingController@search',
+    'as' => 'meetings.search'
+]);
 Route::resource('plansView', 'PlansViewController');
