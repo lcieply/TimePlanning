@@ -102,7 +102,35 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-        //
+        $request->user2_id = $_POST['user2_id'];
+        if(isset($_POST['allday'])) {
+            $start = str_replace('.', '-', $_POST['start_date'].' 00:00:00');
+            $request->merge(array('start' =>  $start));
+            $this->validate($request, Meeting::rulesAllDay());
+            $meeting->update([
+                'start_time' => $start,
+                'end_time' => $start,
+                'private' => $request->private,
+                'allday' => $request->allday
+            ]);
+
+        }else{
+            $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
+            $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
+            $request->merge(array('start' =>  $start));
+            $request->merge(array('end' =>  $end));
+            $this->validate($request, Meeting::rules());
+
+            $meeting->update([
+                'start_time' => $start,
+                'end_time' => $end,
+                'private' => $request->private,
+                'allday' => $request->allday
+            ]);
+        }
+
+
+        return redirect()->route('meetings.show', $meeting);
     }
 
     /**

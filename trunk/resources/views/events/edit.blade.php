@@ -1,4 +1,18 @@
 @extends('layouts.app')
+@section('script')
+    <script type="text/javascript">
+        function hideElements() {
+            if (document.getElementById("allDayCheck").checked) {
+                $(".toHide").attr('disabled', true);
+                $(".toHide").attr('hidden', true);
+            } else {
+                $(".toHide").attr('disabled', false);
+                $(".toHide").attr('hidden', false);
+            }
+
+        }
+    </script>
+@endsection
 @section('content')
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}"/>
     <br><br><br><br>
@@ -44,24 +58,32 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="start_time" class="col-md-4 control-label">Start time</label>
+                                <label for="allday" class="col-md-4 control-label">All day</label>
                                 <div class="col-md-6">
+                                    <input type="hidden" value="0" name="allday"/>
+                                    <input type="checkbox" value="1" name="allday" id="allDayCheck" onclick="hideElements()" @if($event->allday ) checked
+                                            @endif/>
+                                </div>
+                            </div>
+                            <div class="form-group toHide" @if($event->allday) disabled hidden @endif>
+                                <label for="start_time" class="col-md-4 control-label">Start time</label>
+                                <div class="col-md-6 toHide">
                                     <input type="time" name="start_time" class="form-control" value="{{ $starttime }}">
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group toHide" @if($event->allday) disabled hidden @endif>
                                 <label for="end_date" class="col-md-4 control-label">End date</label>
                                 <?php
                                 $enddate = explode(" ", $event->end_time);
                                 $endtime = substr($enddate[1], 0, 5);
                                 ?>
-                                <div class="col-md-6">
+                                <div class="col-md-6 toHide" @if($event->allday) disabled hidden @endif>
                                     <input type="date" name="end_date" class="form-control" value="{{ $enddate[0] }}">
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group toHide" @if($event->allday) disabled hidden @endif>
                                 <label for="end_time" class="col-md-4 control-label">End time</label>
                                 <div class="col-md-6">
                                     <input type="time" name="end_time" class="form-control" value="{{ $endtime }}">

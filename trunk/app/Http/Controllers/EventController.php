@@ -52,7 +52,8 @@ class EventController extends Controller
                 'description' => $request->description,
                 'start_time' => $start,
                 'end_time' => $start,
-                'private' => $request->private
+                'private' => $request->private,
+                'allday' => 1
             ]);
         }else{
             $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
@@ -67,7 +68,8 @@ class EventController extends Controller
                 'description' => $request->description,
                 'start_time' => $start,
                 'end_time' => $end,
-                'private' => $request->private
+                'private' => $request->private,
+                'allday' => 0
             ]);
         }
         return redirect()->route('home.index');
@@ -104,19 +106,36 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
-        $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
-        $request->merge(array('start' =>  $start));
-        $request->merge(array('end' =>  $end));
-        $this->validate($request, Event::rules());
+        if(isset($_POST['allday'])) {
+            $start = str_replace('.', '-', $_POST['start_date'].' 00:00:00');
+            $request->merge(array('start' =>  $start));
+            $this->validate($request, Event::rulesAllDay());
+            $event->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'start_time' => $start,
+                'end_time' => $start,
+                'private' => $request->private,
+                'allday' => $request->allday
+            ]);
 
-        $event->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'start_time' => $start,
-            'end_time' => $end,
-            'private' => $request->private,
-        ]);
+        }else{
+            $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
+            $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
+            $request->merge(array('start' =>  $start));
+            $request->merge(array('end' =>  $end));
+            $this->validate($request, Event::rules());
+
+            $event->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'start_time' => $start,
+                'end_time' => $end,
+                'private' => $request->private,
+                'allday' => $request->allday
+            ]);
+        }
+
 
         return redirect()->route('events.show', $event);
     }

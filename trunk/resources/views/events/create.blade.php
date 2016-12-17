@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">All day</label>
+                                <label for="allday" class="col-md-4 control-label">All day</label>
                                 <div class="col-md-6">
                                     <input type="checkbox" id="allDayCheck" name="allday" value="0" onclick="hideElements()"/>
                                 </div>
@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">Private</label>
+                                <label for="private" class="col-md-4 control-label">Private</label>
                                 <div class="col-md-6">
                                     <input type="hidden" value="0" name="private"/>
                                     <input type="checkbox" value="1" name="private"/>

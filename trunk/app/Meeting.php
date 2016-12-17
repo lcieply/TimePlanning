@@ -31,7 +31,20 @@ class Meeting extends Model implements \MaddHatter\LaravelFullcalendar\Event
     {
         return $this->id;
     }
-
+    
+    public function getSecondUserId(){
+        return $this->user2_id;
+    }
+    public function getTitleToUser(){
+        return User::find($this->user_id)->name .
+        " ".
+        User::find($this->user_id)->surname;
+    }
+    public function getTitleToSecondUser(){
+        return User::find($this->user2_id)->name .
+        " ".
+        User::find($this->user2_id)->surname;
+    }
     public function getTitle()
     {
         return "Meeting " .
