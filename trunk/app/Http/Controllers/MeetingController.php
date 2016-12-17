@@ -42,15 +42,13 @@ class MeetingController extends Controller
             $start = str_replace('.', '-', $_POST['start_date'].' 00:00:00');
             $request->merge(array('start' =>  $start));
             $this->validate($request, Meeting::rulesAllDay());
-            $check = 0;
-            if(isset($_POST['private'])) $check = 1;
 
             \DB::table('meetings')->insert([
                 'user_id' => User::id(),
                 'user2_id' => $_POST['user2_id'],
                 'start_time' => $start,
                 'end_time' => $start,
-                'private' => $check,
+                'private' => $_POST['private'],
                 'allday' => 1
             ]);
         }else{
@@ -59,15 +57,13 @@ class MeetingController extends Controller
             $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
             $request->merge(array('end' =>  $end));
             $this->validate($request, Meeting::rules());
-            $check = 0;
-            if(isset($_POST['private'])) $check = 1;
 
             \DB::table('meetings')->insert([
                 'user_id' => User::id(),
                 'user2_id' => $_POST['user2_id'],
                 'start_time' => $start,
                 'end_time' => $end,
-                'private' => $check,
+                'private' => $_POST['private'],
                 'allday' => 0
             ]);
         }

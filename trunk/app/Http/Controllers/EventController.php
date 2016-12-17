@@ -41,21 +41,35 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
-        $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
-        $request->merge(array('start' =>  $start));
-        $request->merge(array('end' =>  $end));
-        $this->validate($request, Event::rules());
+        if(isset($_POST['allday'])){
+            $start = str_replace('.', '-', $_POST['start_date'].' 00:00:00');
+            $request->merge(array('start' =>  $start));
+            $this->validate($request, Event::rulesAllDay());
 
-        \DB::table('events')->insert([
-            'user_id' => User::id(),
-            'title' => $request->title,
-            'description' => $request->description,
-            'start_time' => $start,
-            'end_time' => $end,
-            'private' => $request->private
-        ]);
+            \DB::table('events')->insert([
+                'user_id' => User::id(),
+                'title' => $request->title,
+                'description' => $request->description,
+                'start_time' => $start,
+                'end_time' => $start,
+                'private' => $request->private
+            ]);
+        }else{
+            $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
+            $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
+            $request->merge(array('start' =>  $start));
+            $request->merge(array('end' =>  $end));
+            $this->validate($request, Event::rules());
 
+            \DB::table('events')->insert([
+                'user_id' => User::id(),
+                'title' => $request->title,
+                'description' => $request->description,
+                'start_time' => $start,
+                'end_time' => $end,
+                'private' => $request->private
+            ]);
+        }
         return redirect()->route('home.index');
     }
 
