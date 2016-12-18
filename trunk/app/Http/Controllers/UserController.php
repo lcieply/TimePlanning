@@ -141,6 +141,9 @@ class UserController extends Controller
         $in=count ($searched);
 
         $users=NULL;
+        $query = User::select('*');
+
+
 
 if($in == 0)
 {
@@ -151,7 +154,7 @@ if($in == 0)
 
            $name = $searched[0];
 
-            if (  $users = DB::table('users')->where('name', $name)->first()  )
+            if ( ( $users = DB::table('users')->where('name', $name)->first() ) || (  $users = DB::table('users')->where('surname', $name)->first() ) )
             {
 
                 return view('users.search')->withUser($users);
@@ -165,7 +168,7 @@ else if($in==2)
     $name = $searched[0];
     $surname = $searched[1];
 
-    if (($users = DB::table('users')->where('name', $name)->first()) ||  ($users = DB::table('users')->where('surname', $surname)->first()))
+    if (($users = DB::table('users')->where('name', $name)->first()) ||  ($users = DB::table('users')->where('surname', $surname)->first()) || ($users = DB::table('users')->where('surname', $name)->first()) ||  ($users = DB::table('users')->where('name', $surname)->first()))
     {
      //   $users = DB::table('users')->where('name', $name)->value('name');
        // $users = DB::table('users')->where('surname', $surname)->value('surname');
