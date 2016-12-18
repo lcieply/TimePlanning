@@ -102,16 +102,11 @@ class MeetingController extends Controller
     public function update(Request $request, Meeting $meeting)
     {
         $request->user2_id = $_POST['user2_id'];
-        if(isset($_POST['allday'])) {
+        if(isset($_POST['allday']) and $_POST['allday'] == 1) {
             $start = str_replace('.', '-', $_POST['start_date'].' 00:00:00');
             $request->merge(array('start' =>  $start));
             $this->validate($request, Meeting::rulesAllDay());
-            $meeting->update([
-                'start_time' => $start,
-                'end_time' => $start,
-                'private' => $request->private,
-                'allday' => $request->allday
-            ]);
+            $this->updateInDB($meeting, $start, $start, $request->private, $request->allday);
 
         }else{
             $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
@@ -119,13 +114,7 @@ class MeetingController extends Controller
             $request->merge(array('start' =>  $start));
             $request->merge(array('end' =>  $end));
             $this->validate($request, Meeting::rules());
-
-            $meeting->update([
-                'start_time' => $start,
-                'end_time' => $end,
-                'private' => $request->private,
-                'allday' => $request->allday
-            ]);
+            $this->updateInDB($meeting, $start, $end, $request->private, $request->allday);
         }
 
 
@@ -152,7 +141,7 @@ class MeetingController extends Controller
 
     private function isBusy($id, $start, $end)
     {
-         $results = DB::select("SELECT * FROM meetings WHERE
+         $results = DB::select("SELECT COUNT(*) FROM meetings WHERE
                              (`user_id` = $id or `user2_id` = $id) AND 
                              (`start_time` BETWEEN \"$start\" and \"$end\" or `end_time` BETWEEN \"$start\" and \"$end\")
                              ");
@@ -160,6 +149,15 @@ class MeetingController extends Controller
 
         return empty($results) ? 0:1;
 
+    }
+
+    public function updateInDB($meeting, $start, $end, $private, $allday){
+        $meeting->update([
+            'start_time' => $start,
+            'end_time' => $end,
+            'private' => $private,
+            'allday' => $allday
+        ]);
     }
 
     private function insertIntoDB($user2_id, $start, $end, $private, $allday)
