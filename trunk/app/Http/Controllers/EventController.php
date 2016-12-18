@@ -45,33 +45,18 @@ class EventController extends Controller
             $start = str_replace('.', '-', $_POST['start_date'].' 00:00:00');
             $request->merge(array('start' =>  $start));
             $this->validate($request, Event::rulesAllDay());
-
-            \DB::table('events')->insert([
-                'user_id' => User::id(),
-                'title' => $request->title,
-                'description' => $request->description,
-                'start_time' => $start,
-                'end_time' => $start,
-                'private' => $request->private,
-                'allday' => 1
-            ]);
+            $end = $start;
         }else{
             $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
             $end = str_replace('.', '-', $_POST['end_date'].' '. $_POST['end_time'].':00');
             $request->merge(array('start' =>  $start));
             $request->merge(array('end' =>  $end));
+            $request->merge(array('allday' =>  0));
             $this->validate($request, Event::rules());
 
-            \DB::table('events')->insert([
-                'user_id' => User::id(),
-                'title' => $request->title,
-                'description' => $request->description,
-                'start_time' => $start,
-                'end_time' => $end,
-                'private' => $request->private,
-                'allday' => 0
-            ]);
+
         }
+        $this->insertIntoDB($request->title, $request->description, $start, $end, $request->private, $request->allday);
         return redirect()->route('home.index');
     }
 
@@ -106,18 +91,11 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        if(isset($_POST['allday'])) {
+        if(isset($_POST['allday']) and $_POST['allday'] == 1) {
             $start = str_replace('.', '-', $_POST['start_date'].' 00:00:00');
             $request->merge(array('start' =>  $start));
             $this->validate($request, Event::rulesAllDay());
-            $event->update([
-                'title' => $request->title,
-                'description' => $request->description,
-                'start_time' => $start,
-                'end_time' => $start,
-                'private' => $request->private,
-                'allday' => $request->allday
-            ]);
+            $end = $start;
 
         }else{
             $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
@@ -126,15 +104,10 @@ class EventController extends Controller
             $request->merge(array('end' =>  $end));
             $this->validate($request, Event::rules());
 
-            $event->update([
-                'title' => $request->title,
-                'description' => $request->description,
-                'start_time' => $start,
-                'end_time' => $end,
-                'private' => $request->private,
-                'allday' => $request->allday
-            ]);
+
         }
+
+        $this->updateInDB($event, $request->title, $request->description, $start, $end, $request->private, $request->allday);
 
 
         return redirect()->route('events.show', $event);
@@ -146,6 +119,29 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    private function updateInDB($event,$title, $description, $start, $end, $private, $allday){
+        $event->update([
+            'title' => $title,
+            'description' => $description,
+            'start_time' => $start,
+            'end_time' => $end,
+            'private' => $private,
+            'allday' => $allday
+        ]);
+    }
+
+    private function insertIntoDB($title, $description, $start, $end, $private, $allday )
+    {
+        \DB::table('events')->insert([
+            'user_id' => User::id(),
+            'title' => $title,
+            'description' => $description,
+            'start_time' => $start,
+            'end_time' => $end,
+            'private' => $private,
+            'allday' => $allday
+        ]);
+    }
     public function destroy(Event $event)
     {
         $event->delete();

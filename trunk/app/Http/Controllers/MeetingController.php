@@ -150,7 +150,7 @@ class MeetingController extends Controller
 
     }
 
-    public function updateInDB($meeting, $start, $end, $private, $allday){
+    private function updateInDB($meeting, $start, $end, $private, $allday){
         $meeting->update([
             'start_time' => $start,
             'end_time' => $end,
