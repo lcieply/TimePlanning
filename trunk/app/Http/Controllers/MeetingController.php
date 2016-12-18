@@ -152,32 +152,14 @@ class MeetingController extends Controller
 
     private function isBusy($id, $start, $end)
     {
-        /*
-         * +        $results = DB::select('select count(*) from meetings where
-+                  (user_id = \'' . $id . '\' OR user2_id = \'' . $id . '\')
-+                  AND ( \'' . $start . '\' BETWEEN start_time AND end_time
-+                  OR \'' . $end . '\' BETWEEN start_time AND end_time);');
-+
-+        return $results == 0 ? false : true;
-         */
-        $resultsMeetings = DB::table('meetings')
-            ->select('*')
-            ->where('user_id', '=', $id)
-            ->whereBetween('start_time', [$start, $end])
-            ->orWhereBetween('end_time', [$start, $end])
-             ->where('user_id', '=', $id)
-            ->get()
-            ->count();
-        $resultsEvents = DB::table('events')
-            ->select('*')
-            ->where('user_id', '=', $id)
-            ->whereBetween('start_time', [$start, $end])
-            ->orWhereBetween('end_time', [$start, $end])
-            ->where('user_id', '=', $id)
-            ->get()
-            ->count();
+         $results = DB::select("SELECT * FROM meetings WHERE
+                             (`user_id` = $id or `user2_id` = $id) AND 
+                             (`start_time` BETWEEN \"$start\" and \"$end\" or `end_time` BETWEEN \"$start\" and \"$end\")
+                             ");
 
-        return $resultsEvents + $resultsMeetings;
+
+        return empty($results) ? 0:1;
+
     }
 
     private function insertIntoDB($user2_id, $start, $end, $private, $allday)
