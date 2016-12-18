@@ -64,7 +64,7 @@
                         <li><a href="{{ url('/register') }}">REGISTER</a></li>
                     @else
                         <li>
-                            <form action="{{route('users.search')}}" method="post" form-horizontal class="navbar-form pull-left">
+                            <form action="{{route('users.search')}}" method="post"  form-horizontal class="navbar-form pull-left">
 
                                 <div class="input-group custom-search-form ">
 
@@ -121,7 +121,9 @@
 <footer>
     <! --- FOOTER & social links --->
 
-    <h5>2016 &copy by:   <a href="https://bitbucket.org/mmaniek95/">  Marta Mańka  <i class="fa fa-bitbucket fa-fw fa-1x"></i></a>
+     <h5>
+        2016 &copy by:
+        <a href="https://bitbucket.org/mmaniek95/">  Marta Mańka  <i class="fa fa-bitbucket fa-fw fa-1x"></i></a>
         <a href="https://bitbucket.org/kamilJur/">  Kamil Jureczka  <i class="fa fa-bitbucket fa-fw fa-1x"></i></a>
         <a href="https://bitbucket.org/lcieply/">  Łukasz Ciepły  <i class="fa fa-bitbucket fa-fw fa-1x"></i></a>
         <a href="https://bitbucket.org/radopopulos/">  Radosław Ciupek  <i class="fa fa-bitbucket fa-fw fa-1x"></i></a>
