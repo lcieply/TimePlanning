@@ -105,8 +105,8 @@ class MeetingController extends Controller
         if(isset($_POST['allday']) and $_POST['allday'] == 1) {
             $start = str_replace('.', '-', $_POST['start_date'].' 00:00:00');
             $request->merge(array('start' =>  $start));
+            $end = $start;
             $this->validate($request, Meeting::rulesAllDay());
-            $this->updateInDB($meeting, $start, $start, $request->private, $request->allday);
 
         }else{
             $start = str_replace('.', '-', $_POST['start_date'].' '. $_POST['start_time'].':00');
@@ -114,9 +114,8 @@ class MeetingController extends Controller
             $request->merge(array('start' =>  $start));
             $request->merge(array('end' =>  $end));
             $this->validate($request, Meeting::rules());
-            $this->updateInDB($meeting, $start, $end, $request->private, $request->allday);
         }
-
+        $this->updateInDB($meeting, $start, $end, $request->private, $request->allday);
 
         return redirect()->route('meetings.show', $meeting);
     }
@@ -141,7 +140,7 @@ class MeetingController extends Controller
 
     private function isBusy($id, $start, $end)
     {
-         $results = DB::select("SELECT COUNT(*) FROM meetings WHERE
+         $results = DB::select("SELECT * FROM meetings WHERE
                              (`user_id` = $id or `user2_id` = $id) AND 
                              (`start_time` BETWEEN \"$start\" and \"$end\" or `end_time` BETWEEN \"$start\" and \"$end\")
                              ");
