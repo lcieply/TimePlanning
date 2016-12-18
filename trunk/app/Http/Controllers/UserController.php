@@ -135,6 +135,54 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-        //
+
+        $search_term = $_POST['search'];
+        $searched = explode(" ", $search_term);
+        $in=count ($searched);
+
+        $users=NULL;
+
+if($in == 0)
+{
+    return("users.search");
+}
+       else if($in==1)
+       {
+
+           $name = $searched[0];
+
+            if (  $users = DB::table('users')->where('name', $name)->first()  )
+            {
+
+                return view('users.search')->withUser($users);
+            }
+           return view('users.search')->withUser($users);
+
+
+        }
+else if($in==2)
+{
+    $name = $searched[0];
+    $surname = $searched[1];
+
+    if (($users = DB::table('users')->where('name', $name)->first()) ||  ($users = DB::table('users')->where('surname', $surname)->first()))
+    {
+     //   $users = DB::table('users')->where('name', $name)->value('name');
+       // $users = DB::table('users')->where('surname', $surname)->value('surname');
+        return view('users.search')->withUser($users);
     }
+
+ return view('users.search')->withUser($users);
+}
+ else
+     {
+
+          return view('users.search')->withUser($users);
+      }
+
+
+
+}
+
+
 }
