@@ -1,5 +1,18 @@
 @extends('layouts.app')
-
+@section('script')
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
+    <script src="{{ URL::asset('js/calendar/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('js/calendar/moment.min.js') }}"></script>
+    <script src="{{ URL::asset('js/calendar/calendar.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ URL::asset('css/calendar.min.css') }}"/>
+    <script>
+        $('#calendar').fullCalendar({
+            windowResize: function(view) {
+                alert('The calendar has adjusted to a window resize');
+            }
+        });
+    </script>
+@endsection
 
 
 @section('content')
@@ -55,7 +68,8 @@
                             {!! $calendar->script() !!}
                             <br>
                             <div class="col-md-8 col-md-offset-2">
-                                <a href="{{url()->previous()}}" value="search" class="btn btn-primary pull-left">Back</a>
+                                <div class="col-md-8 col-md-offset-2">
+                                <a href="{{url()->previous()}}" value="home" class="btn btn-primary pull-left">Back</a>
                                 <a href="{{route('meetings.create', $user->id)}}" class="btn btn-primary  ">New meeting</a>
                                 <br><br>
 
@@ -74,8 +88,29 @@
     </div>
 
 
-        <h1> This user hasn't exist yet!!!</h1>
+
     <br><br>
 
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
