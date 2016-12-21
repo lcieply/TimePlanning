@@ -153,13 +153,17 @@ if($in == 0)
        {
 
            $name = $searched[0];
+           $surname = $searched[0];
+$results=DB::select("SELECT * FROM users WHERE (`name` = \"$name\"  OR `surname` = \"$surname\" )");
 
-            if ( ( $users = DB::table('users')->where('name', $name)->first() ) || (  $users = DB::table('users')->where('surname', $name)->first() ) )
-            {
 
-                return view('users.search')->withUser($users);
-            }
-           return view('users.search')->withUser($users);
+
+          //  if ( ( $users = DB::table('users')->where('name', $name)->first() ) || (  $users = DB::table('users')->where('surname', $name)->first() ) )
+         //   {
+
+         //       return view('users.search')->withUser($users);
+          //  }
+           return view('users.search')->withUser($results);
 
 
         }

@@ -17,7 +17,7 @@
 
     Any search results
 @else
-
+@foreach($user as $users)
 
                                 <a href="{{ route('users.show', $user->id)}}">
                                 {{$user->name}} {{$user->surname}} {{$user->email}}
@@ -26,7 +26,7 @@
                                     <br>
 
 
-
+@endforeach
 
 @endif
 
