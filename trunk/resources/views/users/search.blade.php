@@ -12,24 +12,16 @@
                     <div class="panel-heading">Search results</div>
                     <div class="panel-body">
                         <div class="form-group">
-
- @if($user==NULL)
-
-    Any search results
-@else
-@foreach($user as $users)
-
+                        @if($users==NULL)
+                                Any search results
+                        @else
+                            @foreach($users as $user)
                                 <a href="{{ route('users.show', $user->id)}}">
-                                {{$user->name}} {{$user->surname}} {{$user->email}}
-                                {{$user->city}} {{$user->address}} {{$user->phone}}
-                                </a>
-                                    <br>
-
-
-@endforeach
-
-@endif
-
+                                    {{$user->name}} {{$user->surname}} {{$user->email}}
+                                    {{$user->city}} {{$user->address}} {{$user->phone}}
+                                </a><br>
+                            @endforeach
+                        @endif
                         </div>
                 </div>
             </div>

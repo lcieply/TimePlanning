@@ -137,59 +137,34 @@ class UserController extends Controller
     {
 
         $search_term = $_POST['search'];
-        $searched = explode(" ", $search_term);
-        $in=count ($searched);
-
+        $searched = explode(" ", $search_term); //array with words - name, surname, name+surname
+        $in=count($searched); //quantity of words in search phrase
         $users=NULL;
-        $query = User::select('*');
-
-
-
-if($in == 0)
-{
-    return("users.search");
-}
+        if($search_term == "")
+        {
+            return view('users.search')->withUsers($users);
+        }
        else if($in==1)
        {
+            $word = $searched[0];
+            $users=DB::select("SELECT * FROM users WHERE (`name` = \"$word\"  OR `surname` = \"$word\" )");
+            return view('users.search')->withUsers($users);
 
+
+       }
+       else if($in==2)
+       {
            $name = $searched[0];
-           $surname = $searched[0];
-$results=DB::select("SELECT * FROM users WHERE (`name` = \"$name\"  OR `surname` = \"$surname\" )");
+           $surname = $searched[1];
+           $users = DB::select("SELECT * FROM users WHERE ((`name` = \"$name\"  AND `surname` = \"$surname\") OR (`name` = \"$surname\"  AND `surname` = \"$name\"))");
+           if(empty($users))
+           {
+               $users = DB::select("SELECT * FROM users WHERE ((`name` = \"$name\"  OR `surname` = \"$name\") OR (`name` = \"$surname\"  OR `surname` = \"$surname\"))");
+           }
+           return view('users.search')->withUsers($users);
+       }
 
-
-
-          //  if ( ( $users = DB::table('users')->where('name', $name)->first() ) || (  $users = DB::table('users')->where('surname', $name)->first() ) )
-         //   {
-
-         //       return view('users.search')->withUser($users);
-          //  }
-           return view('users.search')->withUser($results);
-
-
-        }
-else if($in==2)
-{
-    $name = $searched[0];
-    $surname = $searched[1];
-
-    if (($users = DB::table('users')->where('name', $name)->first()) ||  ($users = DB::table('users')->where('surname', $surname)->first()) || ($users = DB::table('users')->where('surname', $name)->first()) ||  ($users = DB::table('users')->where('name', $surname)->first()))
-    {
-     //   $users = DB::table('users')->where('name', $name)->value('name');
-       // $users = DB::table('users')->where('surname', $surname)->value('surname');
-        return view('users.search')->withUser($users);
     }
-
- return view('users.search')->withUser($users);
-}
- else
-     {
-
-          return view('users.search')->withUser($users);
-      }
-
-
-
-}
 
 
 }
