@@ -140,7 +140,7 @@ class UserController extends Controller
         $searched = explode(" ", $search_term); //array with words - name, surname, name+surname
         $in=count($searched); //quantity of words in search phrase
         $users=NULL;
-        if($search_term == "")
+        if($search_term == "" )
         {
             return view('users.search')->withUsers($users);
         }
@@ -152,7 +152,7 @@ class UserController extends Controller
 
 
        }
-       else if($in==2)
+       else if($in>=2)
        {
            $name = $searched[0];
            $surname = $searched[1];
@@ -163,6 +163,7 @@ class UserController extends Controller
            }
            return view('users.search')->withUsers($users);
        }
+        return view('users.search')->withUsers($users);
 
     }
 
