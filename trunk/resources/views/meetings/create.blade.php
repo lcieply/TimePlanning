@@ -18,7 +18,7 @@
     <br><br><br><br>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-10 col-md-offset-1">
                 <div>
                     @foreach ($errors->all() as $message)
                         <p class="alert alert-warning">
@@ -32,80 +32,128 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-5">
-                                <label class="control-label"> You can specify a time manualy</label>
-                                <br>
+                                <label class="control-label panel-heading" > You can specify a time manualy</label>
+
+
                                 <form action="{{route('meetings.store')}}" method="post">
                                     <div>
 
-                                        <label for="start_date"  class=" control-label">Start date</label>
+                                        <label for="start_date"  class="col-md-4 control-label">Start date</label>
+                                        <div class="col-md-8">
                                         <input type="date" name="start_date" class="form-control" value="{{ old('start_date') }}">
+                                            <br>
                                     </div>
-                                    <div>
-                                        <label for="allday" class=" control-label">All day</label>
-                                        <input type="hidden" class="form-control"value="0" name="allday"/>
-                                        <input type="checkbox" id="allDayCheck" name="allday" value="1" onclick="hideElements()"/>
+                                        </div>
+                                    <div class="col-md-12">
+                                        <label for="allday" class="col-md-4 control-label">All day</label>
+
+                                        <div class="col-md-8">
+                                            <input type="hidden" class="control-label" value="0" name="allday"/>
+
+                                            <input type="checkbox"  class="control-label" id="allDayCheck" name="allday" value="1" onclick="hideElements()" />
+                                            <br><br>
+                                        </div>
+
                                     </div>
+
+
                                     <div>
-                                        <label for="start_time" class="toHide control-label">Start time</label>
-                                        <input type="time" name="start_time" class="form-control"class="toHide"
+
+                                        <label for="start_time" class="col-md-4 toHide control-label ">Start time</label>
+                                        <div class="col-md-8">
+                                        <input type="time" name="start_time" class="form-control toHide"
+
                                                value="{{ old('start_time') }}">
+                                            <br>
+
                                     </div>
+                                        </div>
                                     <div>
-                                        <label for="end_date" class="toHide control-label">End date</label>
+                                        <label for="end_date" class="col-md-4 toHide control-label">End date</label>
+                                        <div class="col-md-8">
                                         <input type="date" name="end_date" class="toHide form-control" value="{{ old('end_date') }}">
+                                            <br>
+                                    </div>
                                     </div>
                                     <div>
-                                        <label for="end_time" class="toHide control-label">End time</label>
+                                        <label for="end_time" class="col-md-4 toHide control-label">End time</label>
+                                        <div class="col-md-8">
                                         <input type="time" name="end_time" class="toHide form-control"  value="{{ old('end_time') }}">
+                                            <br>
                                     </div>
-                                    <div>
-                                        <label for="private" class="control-label">Private</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="private" class="col-md-4 control-label">Private</label>
+                                        <div class="col-md-8">
                                         <input type="hidden" value="0"  name="private"/>
                                         <input type="checkbox" name="private"  value="private"/>
+                                            <br><br>
                                     </div>
+                                            </div>
                                     <input type="text" name="user2_id" value="{{$id}}" hidden>
                                     <input type="text" name="start" value="" hidden>
                                     <input type="text" name="end" value="" hidden>
                                     <div>
-                                        <br>
-                                        <input type="submit" value="Create" class="btn btn-primary">
+
+                                        <div class="col-md-12">
+
+                                        <input type="submit" value="Create" class="btn btn-primary"><br>
                                         {{csrf_field()}}
                                     </div>
+                                        </div>
 
                                 </form>
                             </div>
+
                             <br>
                             <div class="col-md-2">
+                                <br><br>
                                 <h3>or</h3>
 
 
                                 <a href="{{url()->previous()}}" value="Back">Back</a>
                             </div>
-                            <div class="col-md-5 ">
-                                <label class="control-label">   Let me do that for you</label>
-<br>
-                                <form action="{{route('meetings.search', $id)}}" method="post">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <form action="{{route('meetings.search', $id)}}" method="post">
+
+                                <label class="control-label panel-heading">   Let me do that for you</label>
+
                                     <div>
-                                        <label for="date" class="control-label">Date</label>
+                                        <label for="date" class="col-md-4  control-label">Date</label>
+                                        <div class="col-md-8">
                                         <input type="date" name="date" class="form-control" value="{{ old('date') }}">
+                                            <br>
                                     </div>
+                                        </div>
                                     <div>
-                                        <label for="time" class="control-label">Between</label>
+                                        <label for="time" class="col-md-4  control-label">Between</label>
+                                            <div class="col-md-8">
                                         <input type="time" name="time"  class="form-control" value="{{ old('time') }}">
-                                        <label for="time2" class="control-label">and</label>
+                                                <br>
+                                                </div>
+                                        <label for="time2" class="col-md-4 control-label">and</label>
+                                        <div class="col-md-8">
                                         <input type="time" name="time2" class="form-control" value="{{ old('time2') }}">
+                                            <br>
+                                            </div>
                                     </div>
                                     <div>
-                                        <label for="duration" class="control-label">Duration</label>
+                                        <label for="duration" class="col-md-4 control-label">Duration</label>
+                                        <div class="col-md-8">
                                         <input type="time" name="duration" class="form-control" value="{{ old('duration') }}">
+                                            <br>
                                     </div>
-                                    <div>
-                                        <br><br>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <br><br>
                                         <input type="submit" value="Search" class="btn btn-primary ">
                                         {{csrf_field()}}
-                                    </div>
-                                </form>
+                                            </div>
 
+                                </form>
+                            </div>
 
                             </div>
                         </div>
