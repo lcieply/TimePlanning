@@ -1,0 +1,6 @@
+1. Test tworzymy komendą : php artisan make:test nazwaTestu
+2. Musimy nadać uprawnienia chmod -R 0777 ( jeśli nie mamy - ja jakoś nie miałam) w
+trunk/storage/logs plikowi laravel.log
+3.  każdy test uruchamiamy komendą phpunit (wymaga wcześniejszego zainstalowania :) )
+WIĘCEJ NA: https://laravel.com/docs/5.1/testing
+
