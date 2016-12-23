@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Meeting;
@@ -67,7 +68,9 @@ class MeetingController extends Controller
 
         $this->insertIntoDB($request->user2_id, $start, $end, $request->private, $request->allday);
 
-        return redirect()->route('home.index');
+        $info = "The meeting was scheduled for " . $start . " to " . $end;
+
+        return view('meetings.create')->withId($request->user2_id)->withInfo($info);
     }
 
     /**
@@ -135,19 +138,30 @@ class MeetingController extends Controller
 
     public function search(Request $request, $id)
     {
-        return redirect()->route('meetings.create', $id);
+        $this->validate($request, Meeting::rulesSearch());
+
+        $result = $this->doThisShit($id, $request->date, $request->time, $request->time2, $request->duration);
+
+        if($result == null) {
+            return view('meetings.create')->with('id', $id)
+                ->withErrors("It's not possible to set a meeting with the specified parameters");
+        }
+
+        $this->insertIntoDB($id, $result[0], $result[1], $request->private2, false);
+
+        $info = "The meeting was scheduled for " . $result[0] . " (Duration: " . $request->duration . ")";
+
+        return view('meetings.create')->withId($id)->withInfo($info);
     }
 
     private function isBusy($id, $start, $end)
     {
-         $results = DB::select("SELECT * FROM meetings WHERE
-                             (`user_id` = $id or `user2_id` = $id) AND 
-                             (`start_time` BETWEEN \"$start\" and \"$end\" or `end_time` BETWEEN \"$start\" and \"$end\")
-                             ");
-
-
-        return empty($results) ? 0:1;
-
+        return Meeting::where(function ($query) use ($id) {
+            $query->where('user_id', $id)->orWhere('user2_id', $id);
+        })->where( function ($query) use ($start, $end) {
+            $query->where([['start_time', '>', $start],['start_time','<', $end]])
+                ->orWhere([['end_time', '>', $start],['end_time','<', $end]]);
+        })->exists();
     }
 
     private function updateInDB($meeting, $start, $end, $private, $allday){
@@ -169,5 +183,51 @@ class MeetingController extends Controller
             'private' => $private,
             'allday' => $allday
         ]);
+    }
+
+    private function getMeetingEndTime($id, $start, $end)
+    {
+        return Meeting::where(function ($query) use ($id) {
+                 $query->where('user_id', $id)->orWhere('user2_id', $id);
+            })->where( function ($query) use ($start, $end) {
+                $query->where([['start_time', '>=', $start],['start_time','<=', $end]])
+                    ->orWhere([['end_time', '>=', $start],['end_time','<=', $end]]);
+            })->orderBy('end_time','DESC')->value('end_time');
+    }
+
+    private function doThisShit($id, $date, $startTime, $endTime, $duration)
+    {
+        $durationHAndM = explode(":", $duration);
+        $lowerLimitTime = Carbon::createFromFormat('Y-m-d H:i', $date . " " . $startTime);
+        $upperLimitTime = Carbon::createFromFormat('Y-m-d H:i', $date . " " . $endTime);
+
+        $start = $lowerLimitTime->copy();
+        $end = $lowerLimitTime->copy()->addHours($durationHAndM[0])->addMinutes($durationHAndM[1]);
+
+        $found = false;
+        while($upperLimitTime->gte($end)) {
+            if($this->isBusy($id, $start, $end)) {
+                $meetingEndTime = $this->getMeetingEndTime($id, $start, $end);
+
+                $start = Carbon::createFromFormat('Y-m-d H:i:s', $meetingEndTime);
+                $end = $start->copy()->addHours($durationHAndM[0])->addMinutes($durationHAndM[1]);
+
+                continue;
+            }
+
+            if($this->isBusy(Auth::id(), $start, $end)) {
+                $meetingEndTime = $this->getMeetingEndTime(Auth::id(), $start, $end);
+
+                $start = Carbon::createFromFormat('Y-m-d H:i:s', $meetingEndTime);
+                $end = $start->copy()->addHours($durationHAndM[0])->addMinutes($durationHAndM[1]);
+
+                continue;
+            }
+
+            $found=true;
+            break;
+        }
+
+       return $found ? [$start, $end] : null;
     }
 }

@@ -28,6 +28,12 @@ class CreateEventsTable extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
         });
+
+        DB::unprepared('
+            CREATE TRIGGER `add_second_to_event` BEFORE INSERT ON `events`
+            FOR EACH ROW
+            SET NEW.start_time = DATE_ADD(NEW.start_time, INTERVAL 1 SECOND)
+        ');
     }
 
     /**
@@ -37,6 +43,7 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
+        DB::unprepared('DROP TRIGGER `add_second_to_event`');
         Schema::dropIfExists('events');
     }
 }

@@ -9,8 +9,9 @@ class Meeting extends Model implements \MaddHatter\LaravelFullcalendar\Event
     protected $dates = ['start_time', 'end_time'];
 
     protected $fillable = [
-        'title', 'start_time', 'end_time', 'allday', 'private'
+        'user_id','user2_id','title', 'start_time', 'end_time', 'allday', 'private'
     ];
+
     public static function rules() {
         return [
             'start' => 'before:end',
@@ -21,12 +22,23 @@ class Meeting extends Model implements \MaddHatter\LaravelFullcalendar\Event
             'end_time' => 'required',
         ];
     }
+
     public static function rulesAllDay() {
         return [
             'user2_id' => 'required',
             'start_date' => 'date|required',
         ];
     }
+
+    public static function rulesSearch() {
+        return [
+            'date' => 'date|required',
+            'time' => 'required',
+            'time2' => 'required',
+            'duration' => 'required',
+        ];
+    }
+
     public function getId()
     {
         return $this->id;
