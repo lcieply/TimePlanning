@@ -36,6 +36,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">New Meeting</div>
                     <div class="panel-body">
+
                         <div class="row">
                             <div class="col-md-5">
                                 <label class="control-label panel-heading"> You can specify a time manualy</label>
@@ -55,9 +56,9 @@
                                         <label for="allday" class="col-md-4 control-label">All day</label>
 
                                         <div class="col-md-8">
-                                            <input type="hidden" class="control-label" value="0" name="allday"/>
+                                            <input type="hidden"  value="0" name="allday"/>
 
-                                            <input type="checkbox" class="control-label" id="allDayCheck" name="allday"
+                                            <input type="checkbox"  id="allDayCheck" name="allday"
                                                    value="1" onclick="hideElements()"/>
                                             <br><br>
                                         </div>
@@ -65,33 +66,31 @@
                                     </div>
 
 
-                                    <div>
 
                                         <label for="start_time" class="col-md-4 toHide control-label ">Start
                                             time</label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-8 toHide">
                                             <input type="time" name="start_time" class="form-control toHide"
 
                                                    value="{{ old('start_time') }}">
                                             <br>
 
-                                        </div>
                                     </div>
-                                    <div>
+
                                         <label for="end_date" class="col-md-4 toHide control-label">End date</label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-8 toHide">
                                             <input type="date" name="end_date" class="toHide form-control"
                                                    value="{{ old('end_date') }}">
                                             <br>
-                                        </div>
+
                                     </div>
-                                    <div>
+
                                         <label for="end_time" class="col-md-4 toHide control-label">End time</label>
-                                        <div class="col-md-8">
-                                            <input type="time" name="end_time" class="toHide form-control"
+                                        <div class="col-md-8 toHide" >
+                                            <input type="time" name="end_time" class=" form-control "
                                                    value="{{ old('end_time') }}">
                                             <br>
-                                        </div>
+
                                     </div>
                                     <div class="col-md-12">
                                         <label for="private" class="col-md-4 control-label">Private</label>
@@ -121,10 +120,9 @@
                                 <br><br>
                                 <h3>or</h3>
 
-
-
+                                <a href="{{route('users.show', $id)}}" class="btn btn-primary">Back</a>
                             </div>
-                            <div class="row">
+
                                 <div class="col-md-5">
                                     <form action="{{route('meetings.search', $id)}}" method="post">
 
@@ -173,18 +171,16 @@
                                             <input type="submit" value="Search" class="btn btn-primary ">
                                             {{csrf_field()}}
                                         </div>
-
+                                        </div>
                                     </form>
-                                </div>
-                                <div class="col-md-2">
-                                <a href="{{route('users.show', $id)}}" class="btn btn-primary">Back</a>
-                                    </div>
+
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+</div>
     <br><br>
 @endsection
