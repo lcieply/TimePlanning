@@ -36,6 +36,12 @@ class CreateMeetingsTable extends Migration
             FOR EACH ROW
             SET NEW.start_time = DATE_ADD(NEW.start_time, INTERVAL 1 SECOND)
         ');
+
+        DB::unprepared('
+            CREATE TRIGGER `add_second_to_updated_meeting` BEFORE UPDATE ON `meetings`
+            FOR EACH ROW
+            SET NEW.start_time = DATE_ADD(NEW.start_time, INTERVAL 1 SECOND)
+        ');
     }
 
     /**
@@ -46,6 +52,7 @@ class CreateMeetingsTable extends Migration
     public function down()
     {
         DB::unprepared('DROP TRIGGER `add_second_to_meeting`');
+        DB::unprepared('DROP TRIGGER `add_second_to_updated_meeting`');
         Schema::dropIfExists('meetings');
     }
 }

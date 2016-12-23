@@ -34,6 +34,12 @@ class CreateEventsTable extends Migration
             FOR EACH ROW
             SET NEW.start_time = DATE_ADD(NEW.start_time, INTERVAL 1 SECOND)
         ');
+
+        DB::unprepared('
+            CREATE TRIGGER `add_second_to_updated_event` BEFORE UPDATE ON `events`
+            FOR EACH ROW
+            SET NEW.start_time = DATE_ADD(NEW.start_time, INTERVAL 1 SECOND)
+        ');
     }
 
     /**
@@ -44,6 +50,7 @@ class CreateEventsTable extends Migration
     public function down()
     {
         DB::unprepared('DROP TRIGGER `add_second_to_event`');
+        DB::unprepared('DROP TRIGGER `add_second_to_updated_event`');
         Schema::dropIfExists('events');
     }
 }
