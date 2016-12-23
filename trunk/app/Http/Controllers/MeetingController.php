@@ -159,8 +159,8 @@ class MeetingController extends Controller
         return Meeting::where(function ($query) use ($id) {
             $query->where('user_id', $id)->orWhere('user2_id', $id);
         })->where( function ($query) use ($start, $end) {
-            $query->where([['start_time', '>=', $start],['start_time','=<', $end]])
-                ->orWhere([['end_time', '>=', $start],['end_time','=<', $end]]);
+            $query->where([['start_time', '>', $start],['start_time','<', $end]])
+                ->orWhere([['end_time', '>', $start],['end_time','<', $end]]);
         })->exists();
     }
 
