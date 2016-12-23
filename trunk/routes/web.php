@@ -21,6 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name('user.activate');
+
 Route::resource('users', 'UserController');
 Route::post('/users/search', [
     'uses' => 'UserController@search',
@@ -34,8 +35,9 @@ Route::get('/meetings/create/{id}', [
     'uses' => 'MeetingController@create',
     'as' => 'meetings.create'
 ]);
-Route::post('meetings/search/{id}', [
-    'uses' => 'MeetingController@search',
-    'as' => 'meetings.search'
-]);
 Route::resource('plansView', 'PlansViewController');
+Route::post('/users/{id}', [
+    'uses' => 'UserController@update',
+    'as' => 'users.update'
+]);
+//Route::resource('/users/{id}', 'UserController');
