@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}"/>
 
@@ -9,7 +8,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Search results</div>
+                    <div class="panel-heading"><h4>Search results</h4></div>
                     <div class="panel-body">
                         <div class="form-group">
                         @if($users==NULL)
@@ -23,11 +22,9 @@
                             @endforeach
                         @endif
                         </div>
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
-    </div>
-    </div>
-    </div>
-
 @endsection
