@@ -9,13 +9,13 @@
                 $(".toHide").attr('disabled', false);
                 $(".toHide").attr('hidden', false);
             }
-
         }
     </script>
 @endsection
+
 @section('content')
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
-<br><br><br><br>
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}"/>
+    <br><br><br><br>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -28,10 +28,11 @@
                     @endforeach
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Meeting</div>
+                    <div class="panel-heading"><h4>Meeting: {{$meeting->getTitleToUser()}} - {{$meeting->getTitleToSecondUser()}}</h4></div>
                     <div class="panel-body">
                         <form action="{{route('meetings.update', $meeting)}}" method="post" form-horizontal
                               class="form-horizontal">
+
                             <div class="form-group">
                                 <label for="start_date" class="col-md-4 control-label">Start date</label>
                                 <?php
@@ -43,14 +44,17 @@
                                            value="{{ $startdate[0] }}">
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="allday" class="col-md-4 control-label">All day</label>
                                 <div class="col-md-6">
                                     <input type="hidden" value="0" name="allday"/>
-                                    <input type="checkbox" value="1" name="allday" id="allDayCheck" onclick="hideElements()" @if($meeting->allday ) checked
+                                    <input type="checkbox" value="1" name="allday" id="allDayCheck"
+                                           onclick="hideElements()" @if($meeting->allday ) checked
                                             @endif/>
                                 </div>
                             </div>
+
                             <div class="form-group toHide" @if($meeting->allday) disabled hidden @endif>
                                 <label for="start_time" class="col-md-4 control-label">Start time</label>
                                 <div class="col-md-6 toHide">
@@ -93,7 +97,6 @@
                                         {{csrf_field()}}
                                         {{method_field('PATCH')}}
 
-
                                         <div class=".col-md-6 col-md-offset-2">
                                             <a href="{{route('meetings.show', $meeting)}}" value="Back"
                                                class="btn btn-primary">Back</a>
@@ -101,9 +104,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type = "text" name = "user2_id" value = "{{$meeting->user2_id}}" hidden>
+                            <input type="text" name="user2_id" value="{{$meeting->user2_id}}" hidden>
                         </form>
-                    </div>
                     </div>
                 </div>
             </div>
