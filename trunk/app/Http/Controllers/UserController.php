@@ -79,13 +79,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        if($id != Auth::user()->id)
-            return view('errors.503');
-        else
-            $user = Auth::user();
-            return view('users.edit')->withUser($user);
+        if($user->id != Auth::id())
+            abort(404);
+
+        return view('users.edit')->withUser($user);
     }
 
     /**
@@ -137,18 +136,34 @@ class UserController extends Controller
     public function search(Request $request)
     {
 
+        $search_term = $_POST['search'];
+        $searched = explode(" ", $search_term); //array with words - name, surname, name+surname
+        $in=count($searched); //quantity of words in search phrase
+        $users=NULL;
+        if($search_term == "" )
+        {
+            return view('users.search')->withUsers($users);
+        }
+       else if($in==1)
+       {
+            $word = $searched[0];
+            $users=DB::select("SELECT * FROM users WHERE (`name` = \"$word\"  OR `surname` = \"$word\" )");
+            return view('users.search')->withUsers($users);
 
 
-        return route('users/2');
-       // SELECT * FROM users WHERE imie LIKE '%{$request}%'
-//return "You search for  "$request->getClientIp();
-     //  $zm= $request->user()->findOrFail($request->name);
-      //  if($zm ==1){
-      //      $request=1;
-     //   }
-    //    $request=2;
-       // return redirect()->route('users.search', $request);
-
+       }
+       else if($in>=2)
+       {
+           $name = $searched[0];
+           $surname = $searched[1];
+           $users = DB::select("SELECT * FROM users WHERE ((`name` = \"$name\"  AND `surname` = \"$surname\") OR (`name` = \"$surname\"  AND `surname` = \"$name\"))");
+           if(empty($users))
+           {
+               $users = DB::select("SELECT * FROM users WHERE ((`name` = \"$name\"  OR `surname` = \"$name\") OR (`name` = \"$surname\"  OR `surname` = \"$surname\"))");
+           }
+           return view('users.search')->withUsers($users);
+       }
+        return view('users.search')->withUsers($users);
 
     }
 
