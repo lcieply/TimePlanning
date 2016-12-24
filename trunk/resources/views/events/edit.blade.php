@@ -107,7 +107,6 @@
                                         {{csrf_field()}}
                                         {{method_field('PATCH')}}
 
-
                                         <div class=".col-md-6 col-md-offset-2">
                                             <a href="{{route('events.show', $event)}}" value="Back"
                                                class="btn btn-primary">Back</a>

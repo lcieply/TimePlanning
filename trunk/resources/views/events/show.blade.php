@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}"/>
     <br><br><br><br>
@@ -6,34 +7,35 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Event</div>
+                    <div class="panel-heading"><h4>Event</h4></div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label for="title" class="col-md-4 control-label">Title: </label>
+                            <label for="title" class="col-md-4 control-label">Title:</label>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input name="title" class="form-control" VALUE=" {{ $event->title  }}" size="20"
                                            readonly>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="description" class="col-md-4 control-label">Description: </label>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input name="description" class="form-control" VALUE=" {{ $event->description  }}" size="20"
                                                readonly>
-
                                     </div>
                                 </div>
+
                                 <label for="start_time" class="col-md-4 control-label">Start time: </label>
                                 <div class="col-md-6">
                                     <div class="form-group">
-
                                         <input name="start_time" class="form-control" VALUE="{{ $event->start_time  }} "
                                                size="20" readonly>
-
                                     </div>
                                 </div>
+
                                 <label for="end_time" class="col-md-4 control-label">End time: </label>
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -41,6 +43,7 @@
                                                size="20" readonly>
                                     </div>
                                 </div>
+
                                 @if($user==$event->user_id)
                                     <label for="private" class="col-md-4 control-label">Private: </label>
                                     <div class="col-md-6">
@@ -52,6 +55,7 @@
                                         </div>
                                     </div>
                                 @endif
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <br>
@@ -66,6 +70,7 @@
                                                    class="btn btn-primary pull-left">Back</a>
                                             @endif
                                         </div>
+
                                         @if($user==$event->user_id)
                                             <div class="col-md-2 ">
 
