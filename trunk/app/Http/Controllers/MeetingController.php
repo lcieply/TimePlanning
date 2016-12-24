@@ -156,12 +156,32 @@ class MeetingController extends Controller
 
     private function isBusy($id, $start, $end)
     {
+        //Correct select:
+        //SELECT * FROM meetings WHERE (user_id=$id or user2_id=$id)
+        // AND (
+        //((start_time>=$start AND start_time<=$end) OR (end_time>=$start AND end_time<=$end))
+        // OR (($start>=start_time AND $start<=end_time) OR ($end>=start_time AND $end<=end_time))
+        //)
+
         return Meeting::where(function ($query) use ($id) {
             $query->where('user_id', $id)->orWhere('user2_id', $id);
-        })->where( function ($query) use ($start, $end) {
-            $query->where([['start_time', '>', $start],['start_time','<', $end]])
-                ->orWhere([['end_time', '>', $start],['end_time','<', $end]]);
-        })->exists();
+        })->where(function ($query) use ($start, $end) {
+            $query->where(function ($query) use ($start, $end) {
+                $query->where(
+                    [['start_time', '>', $start], ['start_time', '<', $end]]
+                )->orWhere(
+                    [['end_time', '>', $start], ['end_time', '<', $end]]
+                );
+            }
+            )->orWhere(function ($query) use ($start, $end) {
+                $query->where(
+                    [['start_time', '<', $start], ['end_time', '>', $start]]
+                )->orWhere(
+                    [['start_time', '<', $end], ['end_time', '>', $end]]
+                );
+            });
+        }
+        )->exists();
     }
 
     private function updateInDB($meeting, $start, $end, $private, $allday){
@@ -188,11 +208,24 @@ class MeetingController extends Controller
     private function getMeetingEndTime($id, $start, $end)
     {
         return Meeting::where(function ($query) use ($id) {
-                 $query->where('user_id', $id)->orWhere('user2_id', $id);
-            })->where( function ($query) use ($start, $end) {
-                $query->where([['start_time', '>=', $start],['start_time','<=', $end]])
-                    ->orWhere([['end_time', '>=', $start],['end_time','<=', $end]]);
-            })->orderBy('end_time','DESC')->value('end_time');
+                $query->where('user_id', $id)->orWhere('user2_id', $id);
+            })->where(function ($query) use ($start, $end) {
+            $query->where(function ($query) use ($start, $end) {
+                    $query->where(
+                        [['start_time', '>', $start], ['start_time', '<', $end]]
+                    )->orWhere(
+                        [['end_time', '>', $start], ['end_time', '<', $end]]
+                    );
+                }
+            )->orWhere(function ($query) use ($start, $end) {
+                    $query->where(
+                        [['start_time', '<', $start], ['end_time', '>', $start]]
+                    )->orWhere(
+                        [['start_time', '<', $end], ['end_time', '>', $end]]
+                        );
+                });
+            }
+        )->orderBy('end_time','DESC')->value('end_time');
     }
 
     private function doThisShit($id, $date, $startTime, $endTime, $duration)
