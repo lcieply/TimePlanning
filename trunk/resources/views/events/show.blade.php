@@ -56,24 +56,17 @@
                                     </div>
                                 @endif
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 col-md-offset-3">
                                     <div class="form-group">
                                         <br>
-                                        <div class="col-md-6  col-md-offset-2">
+                                        <div class="col-md-6 col-md-offset-2">
                                             @if($user==$event->user_id)
-                                                <a href="{{route('home.index')}}" value="home"
-                                                   class="btn btn-primary pull-left">Back</a>
                                                 <a href="{{route('events.edit', $event)}}" value="Edit"
                                                    class="btn btn-primary  ">Edit</a>
-                                            @else
-                                                <a href="{{url()->previous()}}" value="home"
-                                                   class="btn btn-primary pull-left">Back</a>
                                             @endif
                                         </div>
-
                                         @if($user==$event->user_id)
                                             <div class="col-md-2 ">
-
                                                 <form action="{{route('events.destroy', $event)}}" method="post"
                                                       form-horizontal class="form-horizontal">
                                                     <input type="submit" value="Delete" class="btn btn-primary " onclick="return confirm('Are you sure you want to delete event?')">

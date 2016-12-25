@@ -28,7 +28,7 @@
                     @endforeach
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Event</div>
+                    <div class="panel-heading"><h4>Event</h4></div>
                     <div class="panel-body">
                         <form action="{{route('events.update', $event)}}" method="post" form-horizontal
                               class="form-horizontal">
@@ -100,17 +100,14 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-6">
-                                    <br>
-                                    <div class=".col-md-6 col-md-offset-2">
+                                <div class="row">
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <a href="{{route('events.show', $event)}}" value="Back"
+                                           class="btn btn-primary">Back</a>
+
                                         <input type="submit" value="Update" class="btn btn-primary pull-right ">
                                         {{csrf_field()}}
                                         {{method_field('PATCH')}}
-
-                                        <div class=".col-md-6 col-md-offset-2">
-                                            <a href="{{route('events.show', $event)}}" value="Back"
-                                               class="btn btn-primary">Back</a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

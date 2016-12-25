@@ -98,9 +98,6 @@
                         <div class="col-md-2">
                             <br><br>
                             <h4>or</h4>
-                            <div class="col-md-12">
-                                <a href="{{route('users.show', $id)}}" class="btn btn-primary">Back</a>
-                            </div>
                         </div>
 
                         <div class="col-md-5">
@@ -147,6 +144,9 @@
                                     {{csrf_field()}}
                                 </div>
                             </form>
+                        </div>
+                        <div class="col-md-12">
+                            <a href="{{route('users.show', $id)}}" class="btn btn-primary">Back</a>
                         </div>
                     </div>
                 </div>

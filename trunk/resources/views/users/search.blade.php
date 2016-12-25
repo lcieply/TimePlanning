@@ -16,8 +16,8 @@
                         @else
                             @foreach($users as $user)
                                 <a href="{{ route('users.show', $user->id)}}">
-                                    {{$user->name}} {{$user->surname}} {{$user->email}}
-                                    {{$user->city}} {{$user->address}} {{$user->phone}}
+                                    {{$user->name}} {{$user->surname}} &nbsp;&nbsp;&nbsp; {{$user->email}}
+                                    &nbsp;&nbsp;&nbsp; {{$user->city}} {{$user->address}} &nbsp;&nbsp;&nbsp; {{$user->phone}}
                                 </a><br>
                             @endforeach
                         @endif
