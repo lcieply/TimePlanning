@@ -47,14 +47,16 @@
                             {!! $calendar->calendar() !!}
                             {!! $calendar->script() !!}
                             <br>
-                            <div class="col-md-8 col-md-offset-2">
+                            @if(Auth::id() != $user->id)
                                 <div class="col-md-8 col-md-offset-2">
-                                    <a href="{{route('meetings.create', $user->id)}}" class="btn btn-primary  ">New
-                                        meeting</a>
-                                    <br>
-                                    <br>
+                                    <div class="col-md-8 col-md-offset-2">
+                                        <a href="{{route('meetings.create', $user->id)}}" class="btn btn-primary  ">New
+                                            meeting</a>
+                                        <br>
+                                        <br>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
