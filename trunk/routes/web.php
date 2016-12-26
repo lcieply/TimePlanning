@@ -27,7 +27,6 @@ Route::post('/users/search', [
     'as' => 'users.search'
 ]);
 Route::resource('home', 'HomeController');
-Route::resource('mettingsInfo', 'MeetingsInfoController');
 Route::resource('events', 'EventController');
 Route::resource('meetings', 'MeetingController');
 Route::get('/meetings/create/{id}', [
@@ -38,4 +37,3 @@ Route::post('meetings/search/{id}', [
     'uses' => 'MeetingController@search',
     'as' => 'meetings.search'
 ]);
-Route::resource('plansView', 'PlansViewController');
