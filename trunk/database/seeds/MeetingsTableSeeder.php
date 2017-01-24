@@ -17,15 +17,15 @@ class MeetingsTableSeeder extends Seeder
             'user_id' => '1',
             'user2_id' => '2',
             'allday' => true,
-            'start_time' => '2016-12-23',
-            'end_time' => '2016-12-23',
+            'start_time' => '2017-01-06',
+            'end_time' => '2017-01-06',
             'private' => false,
         ], [
             'user_id' => '1',
             'user2_id' => '2',
             'allday' => true,
-            'start_time' => '2016-12-29',
-            'end_time' => '2016-12-29',
+            'start_time' => '2017-01-23',
+            'end_time' => '2017-01-23',
             'private' => true,
         ]]);
     }

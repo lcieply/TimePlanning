@@ -140,7 +140,7 @@ class MeetingController extends Controller
     {
         $this->validate($request, Meeting::rulesSearch());
 
-        $result = $this->doThisShit($id, $request->date, $request->time, $request->time2, $request->duration);
+        $result = $this->searchMeetingTime($id, $request->date, $request->time, $request->time2, $request->duration);
 
         if($result == null) {
             return view('meetings.create')->with('id', $id)
@@ -156,13 +156,6 @@ class MeetingController extends Controller
 
     private function isBusy($id, $start, $end)
     {
-        //Correct select:
-        //SELECT * FROM meetings WHERE (user_id=$id or user2_id=$id)
-        // AND (
-        //((start_time>=$start AND start_time<=$end) OR (end_time>=$start AND end_time<=$end))
-        // OR (($start>=start_time AND $start<=end_time) OR ($end>=start_time AND $end<=end_time))
-        //)
-
         return Meeting::where(function ($query) use ($id) {
             $query->where('user_id', $id)->orWhere('user2_id', $id);
         })->where(function ($query) use ($start, $end) {
@@ -228,7 +221,7 @@ class MeetingController extends Controller
         )->orderBy('end_time','DESC')->value('end_time');
     }
 
-    private function doThisShit($id, $date, $startTime, $endTime, $duration)
+    private function searchMeetingTime($id, $date, $startTime, $endTime, $duration)
     {
         $durationHAndM = explode(":", $duration);
         $lowerLimitTime = Carbon::createFromFormat('Y-m-d H:i', $date . " " . $startTime);
